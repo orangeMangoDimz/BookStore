@@ -7,9 +7,8 @@
     font-family: 'Roboto', sans-serif;
 }
 
-main{
-    min-width: 100%;
-    min-height: 100vw;
+body{
+    height: 100vh;
 }
 
 header{
@@ -20,5 +19,10 @@ header{
 
 footer{
     position: sticky;
-    bottom: 0;
+    top: 100%;
+}
+
+.card-footer{
+    background: none;
+    border: none;
 }
