@@ -16,4 +16,9 @@ class BookRepository
     {
         return Book::all();
     }
+
+    public function getBookById(String $bookID): Book
+    {
+        return Book::find($bookID);
+    }
 }

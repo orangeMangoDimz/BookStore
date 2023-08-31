@@ -25,4 +25,11 @@ class BookController extends Controller
         $this->service->storeBook($validated);
         return redirect(route('home'));
     }
+
+    public function showBookDetail()
+    {
+        $bookId = $_POST['bookID'];
+        $book = $this->service->getBookById($bookId);
+        return view('book.detailBook', compact('book'));
+    }
 }

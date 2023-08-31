@@ -24,4 +24,9 @@ class BookService
     {
         return $this->repository->getAllBooks();
     }
+
+    public function getBookById(String $bookID): Book
+    {
+        return $this->repository->getBookById($bookID);
+    }
 }
