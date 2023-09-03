@@ -12,7 +12,7 @@
             <p><strong>Description</strong></p>
             <p>{{ $book->description }}</p>
         
-            <a href="" class="btn btn-warning p-2">Update</a>
+            <a href="{{ route('book.update', $book->id) }}" class="btn btn-warning p-2">Update</a>
             <a href="" class="btn btn-danger p-2">Delete</a>
         </div>
     </div>

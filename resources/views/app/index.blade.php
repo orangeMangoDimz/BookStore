@@ -16,7 +16,7 @@
                         <img src="..." class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">{{ $book->bookTitle }}</h5>
-                            <p class="card-text">{{ $book->description }}
+                            <p class="card-text">{{ strlen($book->description) > 215 ? mb_strimwidth($book->description, 0, 215, '...') : $book->description }}
                             <div class="card-footer d-flex justify-content-center align-items-center">
                                 <button type="button" class="bookDetailBtn btn btn-primary p-2 w-100"
                                     data-bs-toggle="modal" data-bs-target="#bookDetail" data-bookId={{ $book->id }}>
@@ -62,7 +62,7 @@
             if (e.target.classList.contains(`bookDetailBtn`)) {
                 const bookID = $(e.target).data('bookid')
                 $.ajax({
-                    url: `book/update/${bookID}`,
+                    url: `book/detail/${bookID}`,
                     type: 'POST',
                     data: {
                         bookID: bookID,

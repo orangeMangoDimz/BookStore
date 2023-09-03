@@ -29,4 +29,9 @@ class BookService
     {
         return $this->repository->getBookById($bookID);
     }
+
+    public function updateBook(array $data): bool
+    {
+        return $this->repository->updateBook($data);
+    }
 }
