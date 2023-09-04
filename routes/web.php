@@ -21,3 +21,4 @@ Route::post('book/store/', [BookController::class, 'storeBook'])->name('book.sto
 Route::post('book/detail/{id}', [BookController::class, 'showBookDetail'])->name('book.detail');
 Route::get('book/update/{id}', [BookController::class, 'update'])->name('book.update');
 Route::post('book/update/{id}', [BookController::class, 'updateBook'])->name('book.updated');
+Route::delete('book/delete/{id}', [BookController::class, 'deleteBook'])->name('book.destroy');

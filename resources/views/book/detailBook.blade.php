@@ -13,7 +13,11 @@
             <p>{{ $book->description }}</p>
         
             <a href="{{ route('book.update', $book->id) }}" class="btn btn-warning p-2">Update</a>
-            <a href="" class="btn btn-danger p-2">Delete</a>
+            <form action="{{ route('book.destroy' , $book->id) }}" method="POST" class="d-inline">
+                @csrf
+                @method('DELETE')
+                <button class="btn btn-danger p-2">Delete</button>
+            </form>
         </div>
     </div>
 </div>

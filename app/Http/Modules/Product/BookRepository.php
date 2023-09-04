@@ -23,11 +23,14 @@ class BookRepository
         return Book::find($bookID);
     }
 
-    public function updateBook(array $data): bool
+    public function updateBook(string $id, array $data): bool
     {
         $data['releaseDate'] = Carbon::parse($data['releaseDate'])->toDateTimeString();
-        // $data['created_at'] = Carbon::parse($data['created_at'])->toDateTimeString();
-        // $data['updated_at'] = Carbon::parse($data['updated_at'])->toDateTimeString();
-        return Book::where('id', $data['id'])->update($data);
+        return Book::where('id', $id)->update($data);
     }
+
+    public function deleteBook(String $id): bool
+    {
+        return Book::find($id)->delete();
+    }   
 }

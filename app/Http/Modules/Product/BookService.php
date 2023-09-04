@@ -30,8 +30,13 @@ class BookService
         return $this->repository->getBookById($bookID);
     }
 
-    public function updateBook(array $data): bool
+    public function updateBook(string $id, array $data)
     {
-        return $this->repository->updateBook($data);
+        return $this->repository->updateBook($id, $data);
+    }
+
+    public function deleteBook(String $id): bool
+    {
+        return $this->repository->deleteBook($id);
     }
 }
