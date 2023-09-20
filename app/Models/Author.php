@@ -6,30 +6,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
 
-class Book extends Model
+class Author extends Model
 {
     use HasFactory;
 
     // ! Note :
     // * When using the UUID, also use the $keyType, $incrementing, and boot function
-    // * Book doesn't have timestamp, so mae sure it has false value
 
     protected $keyType = 'string';
     public $incrementing = false;
-    public $timestamps = false;
     protected $guarded = ['id'];
-    protected $casts = [
-        'releaseDate' => 'datetime'
-    ];
-
-    public function publisher()
+    
+    public function book()
     {
-        return $this->belongsTo(Publisher::class, 'publisher_id');
-    }
-
-    public function author()
-    {
-        return $this->belongsTo(Author::class, 'author_id');
+        return $this->hasMany(Book::class);
     }
 
     public static function boot()

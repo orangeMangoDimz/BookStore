@@ -1,7 +1,7 @@
 <header>
     <nav class="navbar navbar-expand-lg bg-dark p-4">
         <div class="container">
-            <a class="navbar-brand text-light fw-semibold fs-4" href="#">BookStore</a>
+            <a class="navbar-brand text-light fw-semibold fs-4" href="{{ route('home') }}">BookStore</a>
             <div>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">

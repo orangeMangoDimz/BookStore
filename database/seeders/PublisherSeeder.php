@@ -19,7 +19,7 @@ class PublisherSeeder extends Seeder
         {
             Publisher::create([
                 'name' => $faker->userName(),
-                'description' => $faker->sentence(3),
+                'description' => $faker->sentence(50),
                 'address' => $faker->address(),
                 'email' => $faker->email()
             ]);

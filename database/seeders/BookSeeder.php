@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Author;
 use App\Models\Book;
 use App\Models\Publisher;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -19,12 +20,14 @@ class BookSeeder extends Seeder
     {
         $faker = Faker::create();
         $publisherIds = Publisher::pluck('id')->toArray();
+        $authorIds = Author::pluck('id')->toArray();
         for ($i = 0; $i < 10; $i++)
         {
             Book::create([
                 'bookTitle' => $faker->title(),
+                'author_id' => $faker->randomElement($authorIds),
                 'publisher_id' => $faker->randomElement($publisherIds),
-                'description' => $faker->paragraph(),
+                'description' => $faker->paragraph(50),
                 'releaseDate' => Carbon::createFromDate(2023, 5, 13)->toDateTimeString(),
                 'price' => rand(5000, 100000)
             ]);
