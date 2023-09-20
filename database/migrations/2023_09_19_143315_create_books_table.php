@@ -16,11 +16,10 @@ return new class extends Migration
             $table->uuid('publisher_id');
             $table->string('bookTitle');
             $table->text('description');
-            $table->string('author');
             $table->integer('price');
             $table->dateTime('releaseDate');
 
-            $table->foreign('publisher_id')->references('id')->on('publishers');
+            $table->foreign('publisher_id')->references('id')->on('publishers')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

@@ -6,7 +6,7 @@
 
         <div class="col-8">
             <p><strong>Title:</strong> {{ $book->bookTitle }}</p>
-            <p><strong>Author:</strong> {{ $book->author }}</p>
+            <p><strong>Publishser:</strong> <a href="{{ route('publisher.detail' , $book->publisher->id) }}">{{ $book->publisher->name }}</a></p>
             <p><strong>Price:</strong> Rp {{ number_format($book->price, 2) }}</p>
             <p><strong>Release Date:</strong> {{ date('D-F-Y', strtotime($book->releaseDate)) }}</p>
             <p><strong>Description</strong></p>

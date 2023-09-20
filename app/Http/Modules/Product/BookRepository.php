@@ -33,4 +33,9 @@ class BookRepository
     {
         return Book::find($id)->delete();
     }   
+
+    public function getSpecificBook($publisherId)
+    {
+        return Book::where('publisher_id', $publisherId)->get();
+    }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BookValidation extends FormRequest
+class PublisherValidation extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,12 +21,11 @@ class BookValidation extends FormRequest
      */
     public function rules(): array
     {
-    return [
-            'bookTitle' => ['required'],
+        return [
+            'name' => ['required'],
             'description' => ['required'],
-            'publisher_id' => ['required', 'exists:publishers,id'],
-            'price' => ['required', 'integer'],
-            'releaseDate' => ['required', 'date']
+            'address' => ['required', 'string'],
+            'email' => ['required', 'email']
         ];
     }
 }

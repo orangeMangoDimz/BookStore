@@ -4,20 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BookValidation;
 use App\http\Modules\Product\BookService;
+use App\Http\Modules\Publisher\PublisherService;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
     protected BookService $service;
+    protected PublisherService $publishers;
 
-    public function __construct(BookService $service)
+    public function __construct(BookService $service, PublisherService $publishers)
     {
         $this->service = $service;
+        $this->publishers = $publishers;
     }
 
 
     public function create(){
-        return view('book.addBook');
+        $publishers = $this->publishers->getAllPublishers();
+        return view('book.addBook', compact('publishers'));
     }
 
     public function storeBook(BookValidation $request)
@@ -27,10 +31,9 @@ class BookController extends Controller
         return redirect(route('home'));
     }
 
-    public function showBookDetail()
+    public function detail($id)
     {
-        $bookId = $_POST['bookID'];
-        $book = $this->service->getBookById($bookId);
+        $book = $this->service->getBookById($id);
         return view('book.detailBook', compact('book'));
     }
     

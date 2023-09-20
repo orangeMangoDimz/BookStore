@@ -25,7 +25,6 @@ class BookSeeder extends Seeder
                 'bookTitle' => $faker->title(),
                 'publisher_id' => $faker->randomElement($publisherIds),
                 'description' => $faker->paragraph(),
-                'author' => $faker->name(),
                 'releaseDate' => Carbon::createFromDate(2023, 5, 13)->toDateTimeString(),
                 'price' => rand(5000, 100000)
             ]);

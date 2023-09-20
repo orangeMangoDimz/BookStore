@@ -39,4 +39,9 @@ class BookService
     {
         return $this->repository->deleteBook($id);
     }
+
+    public function getSpecificBook($publisherId)
+    {
+        return $this->repository->getSpecificBook($publisherId);
+    }
 }
