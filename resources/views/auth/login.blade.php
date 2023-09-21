@@ -5,9 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Register</title>
-
-    {{-- bottstrap --}}
+    <title>Login</title>
+    {{-- bootstrap --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
@@ -20,6 +19,7 @@
 </head>
 
 <body>
+
     <section class="vh-100" style="background-color: #eee;">
         <div class="container h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
@@ -28,15 +28,9 @@
                         <div class="card-body p-md-5">
                             <div class="row justify-content-center">
                                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign Up</p>
-                                    <form action="{{ route('user.store') }}" method="POST">
+                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign In</p>
+                                    <form action="{{ route('user.search') }}" method="POST">
                                         @csrf
-                                        <div class="mb-3">
-                                            <label for="name" class="form-label">Name</label>
-                                            <input type="text" class="form-control" id="name"
-                                                aria-describedby="name" name="name" placeholder="Name"
-                                                value="{{ old('name') }}">
-                                        </div>
                                         <div class="mb-3">
                                             <label for="email" class="form-label">Email</label>
                                             <input type="email" class="form-control" id="email"
@@ -49,23 +43,16 @@
                                                 placeholder="Password">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="password_confirmation" class="form-label">Confirm
-                                                Password</label>
-                                            <input type="password" class="form-control" id="password_confirmation"
-                                                name="password_confirmation" placeholder="Confirm Password">
-                                        </div>
-                                        <div class="mb-3">
                                             <input type="checkbox" class="me-2" id="privacyAndPolicy"
                                                 name="privacyAndPolicy">
-                                            <label for="privacyAndPolicy" class="form-label">I accept the terms and
-                                                conditions of the Privacy Policy</label>
+                                            <label for="privacyAndPolicy" class="form-label">Remember Mey</label>
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Sign Up Now</button>
+                                        <button type="submit" class="btn btn-primary">Sign In</button>
                                     </form>
                                     <div class="mt-3">
-                                        <label for="privacyAndPolicy" class="form-label">Already Have an Account? <a
-                                                href="{{ route('login') }}"
-                                                class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Login
+                                        <label for="privacyAndPolicy" class="form-label">Don't have an account yet?
+                                            <a href="{{ route('register') }}"
+                                                class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Register
                                                 Now</a></label>
                                     </div>
                                 </div>
@@ -90,6 +77,7 @@
             </div>
         </div>
     </section>
+
 </body>
 
 </html>

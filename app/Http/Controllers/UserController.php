@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\http\Modules\User\UserService;
 use App\Http\Requests\UserValidation;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -21,16 +23,35 @@ class UserController extends Controller
 
     public function store(UserValidation $request)
     {
-        $validated = $request->validated;
-        print_r($validated);
-        // $success = $this->service->register($validated);
-        // return $success 
-        //     ? redirect()->route('home')
-        //     : redirect()->back();
+        $validated = $request->validated();
+        $success = $this->service->register($validated);
+        return $success
+            ? redirect()->route('home')
+            : redirect()->back();
     }
 
     public function login()
     {
+        return view('auth.login');
+    }
 
+    public function search(UserValidation $request)
+    {
+        $validated = $request->validated();
+        if (Auth::attempt($validated)) {
+            $request->session()->regenerate();
+            return redirect()->route('home');
+        }
+        return redirect()->back()->withErrors([
+            'error' => "Email or pasword doesn't match with any user!"
+        ]);
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('home');
     }
 }

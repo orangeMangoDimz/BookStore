@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [AppController::class, 'index'])->name('home');
+Route::get('/', [AppController::class, 'index'])->name('home')->middleware('guest');
 
 // * Book
 Route::get('book/create/', [BookController::class, 'create'])->name('createBook');
@@ -36,5 +36,7 @@ Route::post('publisher/store/', [PublisherController::class, 'store'])->name('pu
 
 // * Auth
 Route::get('register/', [UserController::class, 'register'])->name('register');
-Route::post('user/store/', [UserController::class, 'store'])->name('user.store');
+Route::post('register/', [UserController::class, 'store'])->name('user.store');
 Route::get('login/', [UserController::class, 'login'])->name('login');
+Route::post('login/', [UserController::class, 'search'])->name('user.search');
+Route::post('logout/', [UserController::class, 'logout'])->name('logout');

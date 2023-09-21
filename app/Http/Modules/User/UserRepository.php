@@ -8,6 +8,6 @@ class UserRepository
 {
     public function register($data): bool
     {
-        return User::create($data);
+        return User::create($data) ? true : false;
     }
 }

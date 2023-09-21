@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UserValidation extends FormRequest
 {
@@ -22,9 +23,15 @@ class UserValidation extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required']
-            // 'email' => ['required', 'email']
-            // 'password' => ['required', 'confirmed','min:8' ],
+            'name' => [Rule::when(request()->routeIs('user.store'), 'required')],
+            'email' => [
+                'required', 'email',
+                Rule::when(request()->routeIs('user.store'), 'exists:users,email')
+            ],
+            'password' => [
+                'required', 'min:6',
+                Rule::when(request()->routeIs('user.store'), 'confirmed')
+            ]
         ];
     }
 }

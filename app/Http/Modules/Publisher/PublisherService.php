@@ -22,6 +22,16 @@ class PublisherService
         return $this->repository->create($data);
     }
 
+    public function update($id, $data)
+    {
+        return $this->repository->update($id, $data);
+    }
+
+    public function delete($id)
+    {
+        $this->repository->delete($id);
+    }
+
     public function getPublisherById($id)
     {
         return $this->repository->getPublisherById($id);
