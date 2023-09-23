@@ -24,6 +24,7 @@ class BookSeeder extends Seeder
         for ($i = 0; $i < 10; $i++)
         {
             Book::create([
+                'image' => '',
                 'bookTitle' => $faker->title(),
                 'author_id' => $faker->randomElement($authorIds),
                 'publisher_id' => $faker->randomElement($publisherIds),

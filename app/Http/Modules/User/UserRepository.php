@@ -10,4 +10,9 @@ class UserRepository
     {
         return User::create($data) ? true : false;
     }
+
+    public function getUserById($id)
+    {
+        return User::find($id);
+    }
 }

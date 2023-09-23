@@ -1,0 +1,8 @@
+.author, .publisher{
+    text-decoration: none;
+    color: black;
+}
+
+.publisher:hover{
+    color: orange;
+}

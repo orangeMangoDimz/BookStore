@@ -20,7 +20,7 @@ class BookService
         return $this->repository->storeBook($data);
     }
 
-    public function getAllBooks(): Collection
+    public function getAllBooks()
     {
         return $this->repository->getAllBooks();
     }

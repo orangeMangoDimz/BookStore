@@ -20,17 +20,21 @@ class UserValidation extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
+    protected $stopOnFirstFailure = true;
     public function rules(): array
     {
         return [
             'name' => [Rule::when(request()->routeIs('user.store'), 'required')],
             'email' => [
                 'required', 'email',
-                Rule::when(request()->routeIs('user.store'), 'exists:users,email')
+                Rule::when(request()->routeIs('user.search'), 'exists:users,email')
             ],
             'password' => [
                 'required', 'min:6',
                 Rule::when(request()->routeIs('user.store'), 'confirmed')
+            ],
+            'terms' => [
+                Rule::when(request()->routeIs('user.store'), 'accepted')
             ]
         ];
     }

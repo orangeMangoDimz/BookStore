@@ -19,9 +19,11 @@ class BookValidation extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
+    protected $stopOnFirstFailure = true;
     public function rules(): array
     {
     return [
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
             'bookTitle' => ['required'],
             'description' => ['required'],
             'publisher_id' => ['required', 'exists:publishers,id'],

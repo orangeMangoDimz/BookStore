@@ -7,17 +7,32 @@
             <hr>
         </div>
 
-        <form method="POST" action="{{ route('book.store') }}">
+        <form method="POST" action="{{ route('book.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="mb-4">
-                <label for="book-title" class="form-label">Book Title</label>
+                <label for="book-title" class="d-block form-label">Cover</label>
+                <img style="display: inline-block;" src="holder.js/200x200?text=image" class="rounded mb-3" id="imgPrev">
+                <input type="file" class="imgUpload form-control" id="book-title" aria-describedby="emailHelp"
+                    placeholder="Book Title" name="image" accept="image/*">
+            </div>
+            @error('image')
+                <div class="alert alert-danger mt-3">{{ $message }}</div>
+            @enderror
+            <div class="mb-4">
+                <label for="book-title" class="form-label">Title</label>
                 <input type="text" class="form-control" id="book-title" aria-describedby="emailHelp"
                     placeholder="Book Title" name="bookTitle">
+                @error('bookTitle')
+                    <div class="alert alert-danger mt-3">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-4">
                 <label for="description" class="form-label">Description</label>
                 <input type="text" class="form-control" id="description" aria-describedby="emailHelp"
                     placeholder="Description" name="description">
+                @error('description')
+                    <div class="alert alert-danger mt-3">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-4">
                 <label for="Publisher" class="form-label">Publisher</label>
@@ -32,14 +47,26 @@
                 <label for="author" class="form-label">Price</label>
                 <div class="input-group">
                     <span class="input-group-text">Rp</span>
-                    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="price">
+                    <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="price">
                 </div>
+                @error('price')
+                    <div class="alert alert-danger mt-3">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-4">
                 <label for="release-date" class="form-label">Release Date</label>
-                <input type="date" class="form-control" id="release-date" placeholder="Release Date" name="releaseDate">
+                <input type="date" class="form-control w-25" id="release-date" placeholder="Release Date"
+                    name="releaseDate">
+                @error('releaseDate')
+                    <div class="alert alert-danger mt-3">{{ $message }}</div>
+                @enderror
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </main>
+@endsection
+
+@section('script')
+    <script src="{{ asset('js/book.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.8/holder.min.js"></script>
 @endsection

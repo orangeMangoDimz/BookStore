@@ -1,4 +1,16 @@
 div .card{
     min-height: 425px;  
+}
 
+.author{
+    text-decoration: none;
+    color: black;
+}
+
+.author:hover{
+    color: orange;
+}
+
+.card:hover{
+    cursor: pointer;
 }

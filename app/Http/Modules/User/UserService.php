@@ -16,4 +16,9 @@ class UserService
     {   
         return $this->repository->register($data);
     }
+
+    public function getUserById($id)
+    {
+        return $this->repository->getUserById($id);
+    }
 }

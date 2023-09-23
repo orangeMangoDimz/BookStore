@@ -13,9 +13,9 @@ class BookRepository
         return Book::create($data);
     }
 
-    public function getAllBooks(): Collection
+    public function getAllBooks()
     {
-        return Book::all();
+        return Book::paginate(8);
     }
 
     public function getBookById(String $bookID): Book

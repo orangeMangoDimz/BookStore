@@ -19,6 +19,7 @@ class PublisherValidation extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
+    protected $stopOnFirstFailure = true;
     public function rules(): array
     {
         return [

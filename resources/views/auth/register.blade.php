@@ -55,8 +55,7 @@
                                                 name="password_confirmation" placeholder="Confirm Password">
                                         </div>
                                         <div class="mb-3">
-                                            <input type="checkbox" class="me-2" id="privacyAndPolicy"
-                                                name="privacyAndPolicy">
+                                            <input type="checkbox" class="me-2" id="privacyAndPolicy" name="terms">
                                             <label for="privacyAndPolicy" class="form-label">I accept the terms and
                                                 conditions of the Privacy Policy</label>
                                         </div>

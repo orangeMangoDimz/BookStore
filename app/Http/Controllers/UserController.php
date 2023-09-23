@@ -26,7 +26,7 @@ class UserController extends Controller
         $validated = $request->validated();
         $success = $this->service->register($validated);
         return $success
-            ? redirect()->route('home')
+            ? redirect()->route('login')
             : redirect()->back();
     }
 
@@ -53,5 +53,11 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('home');
+    }
+
+    public function profile($id)
+    {
+        $user = $this->service->getUserById($id);
+        return view('auth.profile', compact('user'));
     }
 }

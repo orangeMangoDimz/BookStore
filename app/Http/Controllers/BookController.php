@@ -6,6 +6,7 @@ use App\Http\Requests\BookValidation;
 use App\http\Modules\Product\BookService;
 use App\Http\Modules\Publisher\PublisherService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -24,9 +25,13 @@ class BookController extends Controller
         return view('book.addBook', compact('publishers'));
     }
 
-    public function storeBook(BookValidation $request)
+    public function store(BookValidation $request)
     {
         $validated = $request->validated();
+        $imageName = time().'.'.$request->image->extension();  
+        $request->image->move(public_path('images'), $imageName);
+        $validated['image'] = $imageName;
+        $validated['author_id'] = "4aa60935-dc63-40fc-adf7-3e4e9d5066ed";
         $this->service->storeBook($validated);
         return redirect(route('home'));
     }
@@ -37,13 +42,13 @@ class BookController extends Controller
         return view('book.detailBook', compact('book'));
     }
     
-    public function update(Request $request)
+    public function edit(Request $request)
     {
         $book = $this->service->getBookById($request->id);
         return view('book.updateBook', compact('book'));
     }
     
-    public function updateBook($id, BookValidation $request)
+    public function update($id, BookValidation $request)
     {
         $book = $request->validated();
         $updated = $this->service->updateBook($id, $book);
@@ -52,7 +57,7 @@ class BookController extends Controller
         : redirect()->back();
     }
 
-    public function deleteBook($id)
+    public function destroy($id)
     {
         $deleted = $this->service->deleteBook($id);
         return $deleted

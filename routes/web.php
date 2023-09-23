@@ -18,15 +18,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [AppController::class, 'index'])->name('home')->middleware('guest');
+Route::get('/', [AppController::class, 'index'])->name('home');
 
 // * Book
-Route::get('book/create/', [BookController::class, 'create'])->name('createBook');
-Route::post('book/store/', [BookController::class, 'storeBook'])->name('book.store');
-Route::post('book/detail/{id}', [BookController::class, 'detail'])->name('book.detail');
-Route::get('book/update/{id}', [BookController::class, 'update'])->name('book.update');
-Route::post('book/update/{id}', [BookController::class, 'updateBook'])->name('book.updated');
-Route::delete('book/delete/{id}', [BookController::class, 'deleteBook'])->name('book.destroy');
+Route::middleware('auth')->group(function () {
+    Route::get('book/create/', [BookController::class, 'create'])->name('book.create');
+    Route::post('book/store/', [BookController::class, 'store'])->name('book.store');
+    Route::post('book/detail/{id}', [BookController::class, 'detail'])->name('book.detail');
+    Route::get('book/update/{id}', [BookController::class, 'edit'])->name('book.edit');
+    Route::post('book/update/{id}', [BookController::class, 'update'])->name('book.update');
+    Route::delete('book/delete/{id}', [BookController::class, 'destroy'])->name('book.destroy');
+});
 
 // * Publisher
 Route::get('publisher/', [PublisherController::class, 'index'])->name('publisher');
@@ -35,8 +37,13 @@ Route::get('publisher/create/', [PublisherController::class, 'create'])->name('p
 Route::post('publisher/store/', [PublisherController::class, 'store'])->name('publisher.store');
 
 // * Auth
-Route::get('register/', [UserController::class, 'register'])->name('register');
-Route::post('register/', [UserController::class, 'store'])->name('user.store');
-Route::get('login/', [UserController::class, 'login'])->name('login');
-Route::post('login/', [UserController::class, 'search'])->name('user.search');
-Route::post('logout/', [UserController::class, 'logout'])->name('logout');
+Route::middleware('guest')->group(function() {
+    Route::get('register/', [UserController::class, 'register'])->name('register');
+    Route::post('register/', [UserController::class, 'store'])->name('user.store');
+    Route::get('login/', [UserController::class, 'login'])->name('login');
+    Route::post('login/', [UserController::class, 'search'])->name('user.search');
+});
+Route::middleware('auth')->group(function() {
+    Route::post('logout/', [UserController::class, 'logout'])->name('logout');
+    Route::get('profile/{id}', [UserController::class, 'profile'])->name('profile');
+ } );

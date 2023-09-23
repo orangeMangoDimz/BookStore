@@ -44,15 +44,15 @@
                                         </div>
                                         <div class="mb-3">
                                             <input type="checkbox" class="me-2" id="privacyAndPolicy"
-                                                name="privacyAndPolicy">
-                                            <label for="privacyAndPolicy" class="form-label">Remember Mey</label>
+                                                name="terms">
+                                            <label for="privacyAndPolicy" class="form-label">Remember Me</label>
                                         </div>
                                         <button type="submit" class="btn btn-primary">Sign In</button>
                                     </form>
                                     <div class="mt-3">
                                         <label for="privacyAndPolicy" class="form-label">Don't have an account yet?
                                             <a href="{{ route('register') }}"
-                                                class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Register
+                                                class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Sign Up
                                                 Now</a></label>
                                     </div>
                                 </div>
