@@ -1,7 +1,7 @@
 <header>
     <nav class="navbar navbar-expand-lg bg-dark p-4">
         <div class="container">
-            <a class="navbar-brand text-light fw-semibold fs-4" href="{{ route('home') }}">GeniusBook</a>
+            <a class="navbar-brand text-light fw-semibold fs-4" href="{{ auth()->user()->role == 'admin' ? route('admin.dashboard') : route('home') }}">GeniusBook</a>
             <div>
                 <ul class="navbar-nav me-auto d-flex justify-content-between align-items-center g-5">
                     <li class="nav-item me-3">

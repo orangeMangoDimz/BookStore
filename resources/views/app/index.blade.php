@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-    <main class="container mt-5 mb-5 fs-5 ">
+    <section class="container mt-5 mb-5 fs-5 ">
         <div class="title-box mb-4 text-center">
             <h1>Explore the Creativity Without Limit</h1>
             <p class="fw-light">GeniusBook is the perfect place to <strong>explore, create, and publish</strong> your own
@@ -83,36 +83,12 @@
             {{-- <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="{{ route('createBook') }}">
             Add Book
           </a> --}}
-    </main>
+    </section>
     <div class="container my-3">
         {{ $books->onEachSide(5)->links() }}
     </div>
 @endsection
 
 @section('script')
-    <script>
-        const main = document.querySelector(`main`)
-        main.addEventListener(`click`, (e) => {
-            if (e.target.classList.contains(`bookDetailBtn`)) {
-                const bookID = $(e.target).data('bookid')
-                $.ajax({
-                    url: `book/detail/${bookID}`,
-                    type: 'POST',
-                    data: {
-                        bookID: bookID,
-                        _token: $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: (
-                        data
-                    ) => { // this function will implicitly run the detail function from controller
-                        $('#bookDetailContent').html(data)
-                    },
-                    error: (e) => {
-                        console.log(bookID)
-                        console.log('erorr')
-                    }
-                })
-            }
-        })
-    </script>
+    <script src="{{ asset('js/index.js') }}"></script>
 @endsection

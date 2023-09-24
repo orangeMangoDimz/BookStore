@@ -45,24 +45,27 @@ class BookController extends Controller
     public function edit(Request $request)
     {
         $book = $this->service->getBookById($request->id);
-        return view('book.updateBook', compact('book'));
+        $publishers = $this->publishers->getAllPublishers();
+        return view('book.updateBook', compact(['book', 'publishers']));
     }
     
     public function update($id, BookValidation $request)
     {
-        $book = $request->validated();
-        $updated = $this->service->updateBook($id, $book);
-        return $updated 
-        ? redirect(route('home'))
-        : redirect()->back();
+        echo 'test';
+        // $book = $request->validated();
+        // $updated = $this->service->updateBook($id, $book);
+        // echo $updated;
+        // return $updated 
+        // ? redirect(route('home'))
+        // : redirect()->back();
     }
 
     public function destroy($id)
     {
         $deleted = $this->service->deleteBook($id);
         return $deleted
-        ? redirect(route('home'))
-        : redirect()->back();
+            ? redirect()->back()
+            : redirect()->back();
     }
 
     public function content($id)

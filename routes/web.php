@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [AppController::class, 'index'])->name('home');
+Route::get('/', [AppController::class, 'index'])->name('home')->middleware('auth');
 
 // * Book
 Route::middleware('auth')->group(function () {
@@ -27,7 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::post('book/store/', [BookController::class, 'store'])->name('book.store');
     Route::post('book/detail/{id}', [BookController::class, 'detail'])->name('book.detail');
     Route::get('book/update/{id}', [BookController::class, 'edit'])->name('book.edit');
-    Route::post('book/update/{id}', [BookController::class, 'update'])->name('book.update');
+    Route::put('book/update/{id}', [BookController::class, 'update'])->name('book.update');
     Route::delete('book/delete/{id}', [BookController::class, 'destroy'])->name('book.destroy');
     Route::get('content/{id}', [BookController::class, 'content'])->name('book.content');
 });
@@ -53,3 +53,6 @@ Route::middleware('auth')->group(function() {
     Route::post('logout/', [UserController::class, 'logout'])->name('logout');
     Route::get('profile/{id}', [UserController::class, 'profile'])->name('profile');
  } );
+
+ // ! Note : Kalau buka route 'home', tidak bisa akses 'view book detail'
+ // * Harus login dulu, baru bisa akses 'view book detail'
