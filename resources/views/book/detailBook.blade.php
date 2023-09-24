@@ -1,19 +1,24 @@
 <link rel="stylesheet" href="{{ asset('css/detail.css') }}">
 
 <div class="container">
-    <div class="row border">
-        <div class="col-4 sticky-top">
-            <img style="display: inline-block; height:auto; width: 100%;" src="{{ asset('images/' . $book->image) }}"
+    <div class="row">
+        <div class="col-4" style="position: sticky; top: 0; height: 300px;">
+            <img style="display: inline-block; height:auto; width: 100%; height: 250px; object-fit: cover; object-position: center;"
+                src="{{ $book->image == "" ? 'holder.js/225x250?text=bookCover' : asset('images/' . $book->image) }}"
                 alt="bookCover">
             <div class="title my-3 fs-6">
                 <h5 class="text-center fs-5">{{ $book->bookTitle }}</h5>
                 <div class="authorInfo my-1">
                     <span class="d-inline"><i class="fi fi-rr-user"></i></span>
-                    <p class="d-inline"><a class="author" href="{{ route('publisher.detail', $book->publisher->id) }}">{{ $book->author->name }}</a></p>
+                    <p class="d-inline"><a class="author"
+                            href="{{ route('publisher.detail', $book->publisher->id) }}">{{ $book->author->name }}</a>
+                    </p>
                 </div>
                 <div class="publisherInfo my-1">
                     <span class="d-inline"><i class="fi fi-rr-users-alt"></i></span>
-                    <p class="d-inline"><a class="publisher" href="{{ route('publisher.detail', $book->publisher->id) }}">{{ $book->publisher->name }}</a></p>
+                    <p class="d-inline"><a class="publisher"
+                            href="{{ route('publisher.detail', $book->publisher->id) }}">{{ $book->publisher->name }}</a>
+                    </p>
                 </div>
                 <div class="releaseDateInfo my-1">
                     <span class="d-inline"><i class="fi fi-rr-calendar"></i></span>
@@ -93,7 +98,7 @@
             </div>
             <div class="modal-footer">
                 <a href="#" class="btn btn-primary">Read this book</a>
-              </div>
+            </div>
             {{-- <a href="{{ route('book.update', $book->id) }}" class="btn btn-warning p-2">Update</a>
             <form action="{{ route('book.destroy', $book->id) }}" method="POST" class="d-inline">
                 @csrf
@@ -103,3 +108,5 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.8/holder.min.js"></script>

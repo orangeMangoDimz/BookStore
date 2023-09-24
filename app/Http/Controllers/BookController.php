@@ -64,4 +64,10 @@ class BookController extends Controller
         ? redirect(route('home'))
         : redirect()->back();
     }
+
+    public function content($id)
+    {
+        $books = $this->service->getBookById($id);
+        return view('book.content', compact('books'));
+    }
 }

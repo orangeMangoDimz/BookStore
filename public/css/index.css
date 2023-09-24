@@ -10,7 +10,3 @@ div .card{
 .author:hover{
     color: orange;
 }
-
-.card:hover{
-    cursor: pointer;
-}

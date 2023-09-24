@@ -11,7 +11,7 @@
             @csrf
             <div class="mb-4">
                 <label for="book-title" class="d-block form-label">Cover</label>
-                <img style="display: inline-block;" src="holder.js/200x200?text=image" class="rounded mb-3" id="imgPrev">
+                <img style="display: inline-block;" src="holder.js/200x200?text=bookCover" class="rounded mb-3" id="imgPrev">
                 <input type="file" class="imgUpload form-control" id="book-title" aria-describedby="emailHelp"
                     placeholder="Book Title" name="image" accept="image/*">
             </div>
@@ -68,5 +68,4 @@
 
 @section('script')
     <script src="{{ asset('js/book.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.8/holder.min.js"></script>
 @endsection

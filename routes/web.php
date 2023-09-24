@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\PublisherController;
@@ -28,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::get('book/update/{id}', [BookController::class, 'edit'])->name('book.edit');
     Route::post('book/update/{id}', [BookController::class, 'update'])->name('book.update');
     Route::delete('book/delete/{id}', [BookController::class, 'destroy'])->name('book.destroy');
+    Route::get('content/{id}', [BookController::class, 'content'])->name('book.content');
 });
 
 // * Publisher
@@ -43,6 +45,10 @@ Route::middleware('guest')->group(function() {
     Route::get('login/', [UserController::class, 'login'])->name('login');
     Route::post('login/', [UserController::class, 'search'])->name('user.search');
 });
+
+// * Admin
+Route::get('admin/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
 Route::middleware('auth')->group(function() {
     Route::post('logout/', [UserController::class, 'logout'])->name('logout');
     Route::get('profile/{id}', [UserController::class, 'profile'])->name('profile');

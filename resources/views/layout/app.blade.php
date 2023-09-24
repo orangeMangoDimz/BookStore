@@ -28,13 +28,17 @@
 <body>
 
     {{-- header sectopm --}}
+    @section('header');
     @include('partial.header')
-
+    @show
+    
     {{-- content section --}}
     @yield('content')
-
+    
     {{-- footer section --}}
+    @section('footer');
     @include('partial.footer')
+    @show
 
     {{-- script section --}}
     @yield('script')
@@ -42,6 +46,8 @@
     {{-- JQuery --}}
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
+    {{-- holder js --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.8/holder.min.js"></script>
 </body>
 
 </html>

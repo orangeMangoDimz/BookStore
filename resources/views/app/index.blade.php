@@ -19,13 +19,15 @@
             </div>
         </div>
 
-        <div class="card py-5 shadow p-2 mb-5 bg-body-tertiary rounded">
+        <div class="card py-3 rounded">
             <div class="d-flex flex-wrap justify-content-evenly">
                 @foreach ($books as $book)
-                    <div class="card bookDetailBtn my-2" data-bs-toggle="modal" data-bs-target="#bookDetail"
-                        data-bookId={{ $book->id }} style="width: 18rem;">
-                        <img style="display: inline-block; height: 250px; object-fit: cover; object-position: center;"
-                            src="{{ asset('images/' . $book->image) }}" class="card-img-top" alt="book-preview">
+                    <div class="card my-2" style="width: 18rem;">
+                        <div class="bookCover d-flex align-items-center justify-content-center">
+                            <img style="display: inline-block; height: 250px; object-fit: cover; object-position: center;"
+                                src="{{ $book->image == '' ? 'holder.js/285x250?text=image' : asset('images/' . $book->image) }}"
+                                class="card-img-top" alt="book-preview">
+                        </div>
                         <div class="card-body">
                             <h4 class="card-title">{{ $book->bookTitle }}</h4>
                             <p class="card-text fs-6 fw-semibold">By: <a class="author"
@@ -53,21 +55,34 @@
                                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            {{-- <h1 class="modal-title fs-5" id="exampleModalLabel">Book Description</h1> --}}
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Book Description</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body" id="bookDetailContent">
                                             {{-- list of content --}}
                                         </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="card-footer mb-3">
+                            {{-- <p class="fs-6 text-danger fw-semibold text-end">{{ 'Rp ' . number_format($book->price, 2) }}</p> --}}
+                            <button type="button" class="bookDetailBtn btn btn-primary p-2 w-100" data-bs-toggle="modal"
+                                data-bs-target="#bookDetail" data-bookId={{ $book->id }}>
+                                View Book Detail
+                            </button>
+                        </div>
                     </div>
                 @endforeach
             </div>
-        </div>
+            {{-- <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="{{ route('createBook') }}">
+            Add Book
+          </a> --}}
     </main>
     <div class="container my-3">
         {{ $books->onEachSide(5)->links() }}
@@ -76,11 +91,10 @@
 
 @section('script')
     <script>
-        const divs = document.querySelectorAll('.bookDetailBtn')
-        divs.forEach(div => {
-            div.addEventListener(`click`, (e) => {
-                const card = e.currentTarget.closest('.card')
-                const bookID = $(card).data('bookid')
+        const main = document.querySelector(`main`)
+        main.addEventListener(`click`, (e) => {
+            if (e.target.classList.contains(`bookDetailBtn`)) {
+                const bookID = $(e.target).data('bookid')
                 $.ajax({
                     url: `book/detail/${bookID}`,
                     type: 'POST',
@@ -98,7 +112,7 @@
                         console.log('erorr')
                     }
                 })
-            })
+            }
         })
     </script>
 @endsection
