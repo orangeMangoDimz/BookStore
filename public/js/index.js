@@ -1,23 +1,29 @@
-const main = document.querySelector(`section`)
+const main = document.querySelector(`section`);
 main.addEventListener(`click`, (e) => {
     if (e.target.classList.contains(`bookDetailBtn`)) {
-        const bookID = $(e.target).data('bookid')
+        const bookID = $(e.target).data("bookid");
         $.ajax({
             url: `book/detail/${bookID}`,
-            type: 'POST',
+            type: "POST",
             data: {
                 bookID: bookID,
-                _token: $('meta[name="csrf-token"]').attr('content')
+                _token: $('meta[name="csrf-token"]').attr("content"),
             },
-            success: (
-                data
-            ) => { // this function will implicitly run the detail function from controller
-                $('#bookDetailContent').html(data)
+            success: (data) => {
+                // this function will implicitly run the detail function from controller
+                $("#bookDetailContent").html(data);
             },
             error: (e) => {
-                console.log(bookID)
-                console.log('erorr')
-            }
-        })
+                console.log(bookID);
+                console.log("erorr");
+            },
+        });
     }
-})
+});
+
+const myCarouselElement = document.querySelector("#myCarousel");
+
+const carousel = new bootstrap.Carousel(myCarouselElement, {
+    interval: 2000,
+    touch: false,
+});

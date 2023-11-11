@@ -35,7 +35,6 @@ class UserValidation extends FormRequest
             ],
             'terms' => [
                 Rule::when(request()->routeIs('user.store'), 'accepted')
-            ]
-        ];
+            ]        ];
     }
 }

@@ -40,8 +40,8 @@ class UserController extends Controller
         $validated = $request->validated();
         if (Auth::attempt($validated)) {
             $request->session()->regenerate();
-            return auth()->user()->role == 'admin' 
-                ?  redirect()->route('admin.dashboard') 
+            return auth()->user()->role == 'admin'
+                ?  redirect()->route('admin.dashboard')
                 :  redirect()->route('home');
         }
         return redirect()->back()->withErrors([

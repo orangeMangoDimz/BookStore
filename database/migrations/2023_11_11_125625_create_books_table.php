@@ -15,6 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('image');
             $table->uuid('author_id');
+            $table->uuid('genre_id');
             $table->uuid('publisher_id');
             $table->string('bookTitle');
             $table->text('description');
@@ -23,6 +24,7 @@ return new class extends Migration
 
             $table->foreign('author_id')->references('id')->on('authors')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('publisher_id')->references('id')->on('publishers')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('genre_id')->references('id')->on('genres')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

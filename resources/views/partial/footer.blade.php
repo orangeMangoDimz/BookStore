@@ -47,13 +47,11 @@
                     style="width: 60px; background-color: #7c4dff; height: 2px" />
                 <p><i class="fas fa-home mr-3"></i> Jl. Raya Kb. Jeruk No.27, RT.1/RW.9, Kb. Jeruk, Kec. Kb. Jeruk, Kota
                     Jakarta Barat, Daerah Khusus Ibukota Jakarta 11530</p>
-                <p><i class="fas fa-envelope mr-3"></i> dimas.zaini@binus.ac.id</p>
-                <p><i class="fas fa-phone mr-3"></i>orangeMangoDimz</p>
             </div>
         </div>
     </div>
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-        © 2020 Copyright:
-        <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+        © 2023 Copyright:
+        <a class="text-white" href="#">Dimas Dani Zaini</a>
     </div>
 </footer>

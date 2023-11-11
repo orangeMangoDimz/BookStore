@@ -28,7 +28,7 @@ class BookController extends Controller
     public function store(BookValidation $request)
     {
         $validated = $request->validated();
-        $imageName = time().'.'.$request->image->extension();  
+        $imageName = time().'.'.$request->image->extension();
         $request->image->move(public_path('images'), $imageName);
         $validated['image'] = $imageName;
         $validated['author_id'] = "4aa60935-dc63-40fc-adf7-3e4e9d5066ed";
@@ -41,21 +41,27 @@ class BookController extends Controller
         $book = $this->service->getBookById($id);
         return view('book.detailBook', compact('book'));
     }
-    
+
     public function edit(Request $request)
     {
         $book = $this->service->getBookById($request->id);
         $publishers = $this->publishers->getAllPublishers();
         return view('book.updateBook', compact(['book', 'publishers']));
     }
-    
+
+    public function read($id)
+    {
+        $book = $this->service->getBookById($id);
+        return view('book.readBook', compact('book'));
+    }
+
     public function update($id, BookValidation $request)
     {
         echo 'test';
         // $book = $request->validated();
         // $updated = $this->service->updateBook($id, $book);
         // echo $updated;
-        // return $updated 
+        // return $updated
         // ? redirect(route('home'))
         // : redirect()->back();
     }

@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-4" style="position: sticky; top: 0; height: 300px;">
             <img style="display: inline-block; height:auto; width: 100%; height: 250px; object-fit: cover; object-position: center;"
-                src="{{ $book->image == "" ? 'holder.js/225x250?text=bookCover' : asset('images/' . $book->image) }}"
+                src="{{ $book->image == '' ? 'holder.js/225x250?text=bookCover' : asset('images/' . $book->image) }}"
                 alt="bookCover">
             <div class="title my-3 fs-6">
                 <h5 class="text-center fs-5">{{ $book->bookTitle }}</h5>
@@ -23,20 +23,6 @@
                 <div class="releaseDateInfo my-1">
                     <span class="d-inline"><i class="fi fi-rr-calendar"></i></span>
                     <p class="d-inline ms-2"> {{ date('D-F-Y', strtotime($book->releaseDate)) }}</p>
-                </div>
-            </div>
-            <div class="row my-3">
-                <div class="col-4 like">
-                    <span>
-                        <i class="fi fi-rr-heart"></i>
-                    </span>
-                    <p class="d-inline">12</p>
-                </div>
-                <div class="col-4 view">
-                    <span>
-                        <i class="fi fi-rr-eye"></i>
-                    </span>
-                    <p class="d-inline">12</p>
                 </div>
             </div>
         </div>
@@ -96,9 +82,9 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
+            {{-- <div class="modal-footer">
                 <a href="#" class="btn btn-primary">Read this book</a>
-            </div>
+            </div> --}}
             {{-- <a href="{{ route('book.update', $book->id) }}" class="btn btn-warning p-2">Update</a>
             <form action="{{ route('book.destroy', $book->id) }}" method="POST" class="d-inline">
                 @csrf

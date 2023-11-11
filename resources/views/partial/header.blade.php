@@ -1,16 +1,21 @@
 <header>
     <nav class="navbar navbar-expand-lg bg-dark p-4">
         <div class="container">
-            <a class="navbar-brand text-light fw-semibold fs-4" href="{{ auth()->user()->role == 'admin' ? route('admin.dashboard') : route('home') }}">GeniusBook</a>
+            <a class="navbar-brand text-light fw-semibold fs-4"
+                href="{{ auth()->user()->role == 'admin' ? route('admin.dashboard') : route('home') }}">GeniusBook</a>
             <div>
                 <ul class="navbar-nav me-auto d-flex justify-content-between align-items-center g-5">
                     <li class="nav-item me-3">
                         <a href="{{ route('home') }}" class="nav-link active text-light fs-5" aria-current="page"
-                            href="#">Genre</a>
+                            href="#">Explore</a>
                     </li>
                     <li class="nav-item me-3">
                         <a href="{{ route('home') }}" class="nav-link active text-light fs-5" aria-current="page"
                             href="#">Trending</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a href="{{ route('book.create') }}" class="btn btn-success" aria-current="page"
+                            href="#">Create a Book</a>
                     </li>
                     @auth
                         <li class="nav-item">
@@ -24,7 +29,8 @@
                                         <a href="#" class="dropdown-item">Whitelist</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('profile', auth()->user()->id) }}" class="dropdown-item">Profile</a>
+                                        <a href="{{ route('profile', auth()->user()->id) }}"
+                                            class="dropdown-item">Profile</a>
                                     </li>
                                     <li>
                                         <a href="#" class="dropdown-item">Setting</a>
@@ -32,7 +38,7 @@
                                     <li>
                                         <form action="{{ route('logout') }}" method="POST">
                                             @csrf
-                                            <button class="dropdown-item" href="#">Logout</button>
+                                            <button class="dropdown-item">Logout</button>
                                         </form>
                                     </li>
                                 </ul>
