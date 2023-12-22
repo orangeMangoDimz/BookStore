@@ -57,7 +57,7 @@
                                     <div class="card my-2" style="width: 18rem;">
                                         <div class="bookCover d-flex align-items-center justify-content-center">
                                             <img style="display: inline-block; height: 250px; object-fit: cover; object-position: center;"
-                                                src="{{ $book->image == '' ? 'holder.js/285x250?text=BookCover' : asset('images/' . $book->image) }}"
+                                                src="{{ $book->image == '' ? 'holder.js/285x250?text=BookCover' : asset('/storage/images/' . $book->image) }}"
                                                 class="card-img-top" alt="book-preview">
                                         </div>
                                         <div class="card-body">
@@ -134,7 +134,7 @@
                     <div class="card my-2" style="width: 18rem;">
                         <div class="bookCover d-flex align-items-center justify-content-center">
                             <img style="display: inline-block; height: 250px; object-fit: cover; object-position: center;"
-                                src="{{ $book->image == '' ? 'holder.js/285x250?text=BookCover' : asset('images/' . $book->image) }}"
+                                src="{{ $book->image == '' ? 'holder.js/285x250?text=BookCover' : asset('/storage/images/' . $book->image) }}"
                                 class="card-img-top" alt="book-preview">
                         </div>
                         <div class="card-body">
