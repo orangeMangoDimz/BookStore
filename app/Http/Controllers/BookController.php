@@ -19,9 +19,6 @@ class BookController extends Controller
         return view('book.addBook', compact('genres'));
     }
 
-    public function create_content($id){
-        return view("book.addBookContent", compact('id'));
-    }
 
     public function store(BookValidation $request)
     {
@@ -33,13 +30,14 @@ class BookController extends Controller
         $validated['description'] = json_encode($array);
         $validated['user_id'] = Auth::user()->id;
         $book = $this->service->storeBook($validated);
-        return redirect()->route('book.create.content' , $book->id);
+        return redirect()->route('book.content.detail', $book->id);
+        // return redirect()->route('book.create.content' , $book->id);
     }
 
-    public function detail($id)
+    public function modal($id)
     {
         $book = $this->service->getBookById($id);
-        return view('book.detailBook', compact('book'));
+        return view('book.modalBook', compact('book'));
     }
 
     public function edit(Request $request)

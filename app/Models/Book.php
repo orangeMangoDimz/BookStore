@@ -34,7 +34,7 @@ class Book extends Model
 
     public function bookContent()
     {
-        return $this->hasOne(BookContent::class, 'book_id');
+        return $this->hasMany(BookContent::class, 'book_id');
     }
 
     public static function boot()

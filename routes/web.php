@@ -5,6 +5,7 @@ use App\Http\Controllers\AppController;
 use App\Http\Controllers\BookContentController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\UserController;
+use App\Models\BookContent;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,15 +24,20 @@ Route::get('/', [AppController::class, 'index'])->name('home')->middleware('auth
 // * Book
 Route::middleware('auth')->group(function () {
     Route::get('book/create/', [BookController::class, 'create'])->name('book.create');
-    Route::get("book/create/content/{id}", [BookController::class, 'create_content'])->name("book.create.content");
-    Route::post('book/create/content/', [BookContentController::class, 'store'])->name('book.content.store');
+
     Route::post('book/store/', [BookController::class, 'store'])->name('book.store');
-    Route::post('book/detail/{id}', [BookController::class, 'detail'])->name('book.detail');
+    Route::post('book/modal/{id}', [BookController::class, 'modal'])->name('book.modal');
     Route::get("book/read/{id}", [BookController::class, 'read'])->name('book.read');
     Route::get('book/update/{id}', [BookController::class, 'edit'])->name('book.edit');
     Route::put('book/update/{id}', [BookController::class, 'update'])->name('book.update');
     Route::delete('book/delete/{id}', [BookController::class, 'destroy'])->name('book.destroy');
     Route::get('content/{id}', [BookController::class, 'content'])->name('book.content');
+
+    // * Book Content
+    Route::get('book/detail/{id}', [BookContentController::class, 'index'])->name('book.content.detail');
+    Route::get("book/create/content/{id}", [BookContentController::class, 'create'])->name("book.content.create");
+    Route::post('book/detail/create/', [BookContentController::class, 'store'])->name('book.content.store');
+
 });
 
 // * Auth

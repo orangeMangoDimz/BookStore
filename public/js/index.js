@@ -3,7 +3,7 @@ main.addEventListener(`click`, (e) => {
     if (e.target.classList.contains(`bookDetailBtn`)) {
         const bookID = $(e.target).data("bookid");
         $.ajax({
-            url: `book/detail/${bookID}`,
+            url: `book/modal/${bookID}`,
             type: "POST",
             data: {
                 bookID: bookID,
@@ -13,9 +13,8 @@ main.addEventListener(`click`, (e) => {
                 // this function will implicitly run the detail function from controller
                 $("#bookDetailContent").html(data);
             },
-            error: (e) => {
-                console.log(bookID);
-                console.log("erorr");
+            error: (error) => {
+                console.log("Error modal : ", error.responseJSON.message);
             },
         });
     }

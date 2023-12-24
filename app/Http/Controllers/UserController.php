@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\http\Modules\Book\BookService;
 use App\http\Modules\User\UserService;
 use App\Http\Requests\UserValidation;
 use Illuminate\Http\Request;
@@ -9,12 +10,8 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    protected UserService $service;
 
-    public function __construct(UserService $service)
-    {
-        $this->service = $service;
-    }
+    public function __construct(protected UserService $service, protected BookService $bookService) {}
 
     public function register()
     {
@@ -60,6 +57,7 @@ class UserController extends Controller
     public function profile($id)
     {
         $user = $this->service->getUserById($id);
-        return view('auth.profile', compact('user'));
+        $books = $this->bookService->getBookByUserId($id);
+        return view('auth.profile', compact(['user', 'books']));
     }
 }
