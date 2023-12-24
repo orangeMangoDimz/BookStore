@@ -1,19 +1,14 @@
 <?php
 
-namespace App\http\Modules\Product;
+namespace App\http\Modules\Book;
 
-use App\Http\Modules\Product\BookRepository;
+use App\Http\Modules\Book\BookRepository;
 use App\Models\Book;
-use Illuminate\Database\Eloquent\Collection;
 
 class BookService
 {
-    protected BookRepository $repository;
 
-    public function __construct(BookRepository $repository)
-    {
-        $this->repository = $repository;
-    }
+    public function __construct(protected BookRepository $repository) {}
 
     public function storeBook(array $data) : Book
     {

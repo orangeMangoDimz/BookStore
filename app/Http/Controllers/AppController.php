@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\http\Modules\Product\BookService;
+use App\http\Modules\Book\BookService;
 use Illuminate\Http\Request;
 
 class AppController extends Controller

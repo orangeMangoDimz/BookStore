@@ -2,27 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\http\Modules\Genre\GenreService;
 use App\Http\Requests\BookValidation;
-use App\http\Modules\Product\BookService;
+use App\http\Modules\Book\BookService;
 use App\Http\Modules\Publisher\PublisherService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
-    protected BookService $service;
-    protected PublisherService $publishers;
 
-    public function __construct(BookService $service, PublisherService $publishers)
-    {
-        $this->service = $service;
-        $this->publishers = $publishers;
-    }
-
+    public function __construct(protected BookService $service, protected GenreService $genreService) {}
 
     public function create(){
-        $publishers = $this->publishers->getAllPublishers();
-        return view('book.addBook', compact('publishers'));
+        $genres = $this->genreService->getAllGenre();
+        return view('book.addBook', compact('genres'));
+    }
+
+    public function create_content($id){
+        return view("book.addBookContent", compact('id'));
     }
 
     public function store(BookValidation $request)
@@ -31,9 +29,11 @@ class BookController extends Controller
         $imageName = time().'.'.$request->image->extension();
         $request->image->move(public_path('images'), $imageName);
         $validated['image'] = $imageName;
-        $validated['author_id'] = "4aa60935-dc63-40fc-adf7-3e4e9d5066ed";
-        $this->service->storeBook($validated);
-        return redirect(route('home'));
+        $array = explode("\r", $validated['description']); // Split by newline character
+        $validated['description'] = json_encode($array);
+        $validated['user_id'] = Auth::user()->id;
+        $book = $this->service->storeBook($validated);
+        return redirect()->route('book.create.content' , $book->id);
     }
 
     public function detail($id)
@@ -45,7 +45,6 @@ class BookController extends Controller
     public function edit(Request $request)
     {
         $book = $this->service->getBookById($request->id);
-        $publishers = $this->publishers->getAllPublishers();
         return view('book.updateBook', compact(['book', 'publishers']));
     }
 

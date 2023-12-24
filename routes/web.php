@@ -2,10 +2,9 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AppController;
+use App\Http\Controllers\BookContentController;
 use App\Http\Controllers\BookController;
-use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\UserController;
-use App\Models\Publisher;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +23,8 @@ Route::get('/', [AppController::class, 'index'])->name('home')->middleware('auth
 // * Book
 Route::middleware('auth')->group(function () {
     Route::get('book/create/', [BookController::class, 'create'])->name('book.create');
+    Route::get("book/create/content/{id}", [BookController::class, 'create_content'])->name("book.create.content");
+    Route::post('book/create/content/', [BookContentController::class, 'store'])->name('book.content.store');
     Route::post('book/store/', [BookController::class, 'store'])->name('book.store');
     Route::post('book/detail/{id}', [BookController::class, 'detail'])->name('book.detail');
     Route::get("book/read/{id}", [BookController::class, 'read'])->name('book.read');
@@ -32,12 +33,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('book/delete/{id}', [BookController::class, 'destroy'])->name('book.destroy');
     Route::get('content/{id}', [BookController::class, 'content'])->name('book.content');
 });
-
-// * Publisher
-Route::get('publisher/', [PublisherController::class, 'index'])->name('publisher');
-Route::get('publisher/detail/{id}', [PublisherController::class, 'detail'])->name('publisher.detail');
-Route::get('publisher/create/', [PublisherController::class, 'create'])->name('publisher.create');
-Route::post('publisher/store/', [PublisherController::class, 'store'])->name('publisher.store');
 
 // * Auth
 Route::middleware('guest')->group(function() {

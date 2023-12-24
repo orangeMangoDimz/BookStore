@@ -1,9 +1,7 @@
 <?php
-namespace App\Http\Modules\Product;
+namespace App\Http\Modules\Book;
 
 use App\Models\Book;
-use DateTime;
-use Illuminate\Database\Eloquent\Collection;
 use Carbon\Carbon;
 
 class BookRepository
@@ -32,7 +30,7 @@ class BookRepository
     public function deleteBook(String $id): bool
     {
         return Book::find($id)->delete();
-    }   
+    }
 
     public function getSpecificBook($publisherId)
     {

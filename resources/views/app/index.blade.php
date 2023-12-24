@@ -57,17 +57,17 @@
                                     <div class="card my-2" style="width: 18rem;">
                                         <div class="bookCover d-flex align-items-center justify-content-center">
                                             <img style="display: inline-block; height: 250px; object-fit: cover; object-position: center;"
-                                                src="{{ $book->image == '' ? 'holder.js/285x250?text=BookCover' : asset('images/' . $book->image) }}"
+                                                src="{{ $book->image == '' ? 'holder.js/285x250?text=BookCover' : asset('/storage/images/' . $book->image) }}"
                                                 class="card-img-top" alt="book-preview">
                                         </div>
                                         <div class="card-body">
                                             <h4 class="card-title">{{ $book->bookTitle }}</h4>
-                                            <p class="card-text fs-6 fw-semibold">By: <a class="author"
-                                                    href="#">{{ $book->author->name }}</a></p>
+                                            <p class="card-text fs-6 fw-semibold">By: <a class="user"
+                                                    href="#">{{ $book->user->name }}</a></p>
                                             <p class="card-text fs-6 mt-2">
-                                                {{ strlen(implode(' ', json_decode($book->description))) > 150
-                                                    ? mb_strimwidth(implode(' ', json_decode($book->description)), 0, 150, '...')
-                                                    : implode(' ', json_decode($book->description)) }}
+                                                {!! strlen(implode(' ', json_decode($book->description))) > 150
+                                                    ? mb_strimwidth(html_entity_decode(implode(' ', json_decode($book->description))), 0, 150, '...')
+                                                    : html_entity_decode(implode(' ', json_decode($book->description))) !!}
                                             </p>
                                             <!-- Modal -->
                                             <div class="modal fade modal-lg" id="bookDetail" tabindex="-1"
@@ -134,17 +134,17 @@
                     <div class="card my-2" style="width: 18rem;">
                         <div class="bookCover d-flex align-items-center justify-content-center">
                             <img style="display: inline-block; height: 250px; object-fit: cover; object-position: center;"
-                                src="{{ $book->image == '' ? 'holder.js/285x250?text=BookCover' : asset('images/' . $book->image) }}"
+                                src="{{ $book->image == '' ? 'holder.js/285x250?text=BookCover' : asset('/storage/images/' . $book->image) }}"
                                 class="card-img-top" alt="book-preview">
                         </div>
                         <div class="card-body">
                             <h4 class="card-title">{{ $book->bookTitle }}</h4>
-                            <p class="card-text fs-6 fw-semibold">By: <a class="author"
-                                    href="#">{{ $book->author->name }}</a></p>
+                            <p class="card-text fs-6 fw-semibold">By: <a class="user"
+                                    href="#">{{ $book->user->name }}</a></p>
                             <p class="card-text fs-6 mt-2">
-                                {{ strlen(implode(' ', json_decode($book->description))) > 150
-                                    ? mb_strimwidth(implode(' ', json_decode($book->description)), 0, 150, '...')
-                                    : implode(' ', json_decode($book->description)) }}
+                                {!! strlen(implode(' ', json_decode($book->description))) > 150
+                                    ? mb_strimwidth(implode('\n', json_decode($book->description)), 0, 150, '...')
+                                    : implode(' ', json_decode($book->description)) !!}
                             </p>
                             <!-- Modal -->
                             <div class="modal fade modal-lg" id="bookDetail" tabindex="-1"
@@ -180,9 +180,6 @@
                     </div>
                 @endforeach
             </div>
-            {{-- <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="{{ route('createBook') }}">
-            Add Book
-          </a> --}}
     </section>
     <div class="container my-3">
         {{ $books->onEachSide(5)->links() }}

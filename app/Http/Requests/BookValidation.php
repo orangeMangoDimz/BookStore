@@ -24,9 +24,9 @@ class BookValidation extends FormRequest
     {
     return [
             'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
-            'bookTitle' => ['required'],
+            'title' => ['required'],
             'description' => ['required'],
-            'publisher_id' => ['required', 'exists:publishers,id'],
+            'genre_id' => ['required', 'exists:genres,id'],
             'price' => ['required', 'integer'],
             'releaseDate' => ['required', 'date']
         ];
