@@ -4,22 +4,10 @@
     <div class="row">
         <div class="col-4" style="position: sticky; top: 0; height: 300px;">
             <img style="display: inline-block; height:auto; width: 100%; height: 250px; object-fit: cover; object-position: center;"
-                src="{{ $book->image == '' ? 'holder.js/225x250?text=bookCover' : asset('images/' . $book->image) }}"
+                src="{{ $book->image == '' ? 'holder.js/225x250?text=bookCover' : asset('/storage/images/' . $book->image) }}"
                 alt="bookCover">
             <div class="title my-3 fs-6">
                 <h5 class="text-center fs-5">{{ $book->bookTitle }}</h5>
-                <div class="authorInfo my-1">
-                    <span class="d-inline"><i class="fi fi-rr-user"></i></span>
-                    <p class="d-inline"><a class="author"
-                            href="{{ route('publisher.detail', $book->publisher->id) }}">{{ $book->author->name }}</a>
-                    </p>
-                </div>
-                <div class="publisherInfo my-1">
-                    <span class="d-inline"><i class="fi fi-rr-users-alt"></i></span>
-                    <p class="d-inline"><a class="publisher"
-                            href="{{ route('publisher.detail', $book->publisher->id) }}">{{ $book->publisher->name }}</a>
-                    </p>
-                </div>
                 <div class="releaseDateInfo my-1">
                     <span class="d-inline"><i class="fi fi-rr-calendar"></i></span>
                     <p class="d-inline ms-2"> {{ date('D-F-Y', strtotime($book->releaseDate)) }}</p>
@@ -39,7 +27,7 @@
                     </h2>
                     <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
                         <div class="accordion-body fs-6">
-                            {{ $book->description }}
+                            {!! html_entity_decode(implode(' ', json_decode($book->description))) !!}
                         </div>
                     </div>
                 </div>

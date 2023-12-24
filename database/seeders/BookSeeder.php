@@ -20,7 +20,7 @@ class BookSeeder extends Seeder
             Storage::put("public/images/" . $imageName[$i], file_get_contents(public_path("images/bookCover/" . $imageName[$i])));
             Book::factory()->create([
                 "image" => $imageName[$i],
-                "bookTitle" => $authorName[$i]
+                "title" => $authorName[$i]
             ]);
         }
     }

@@ -1,4 +1,4 @@
-<header>
+<header class="z-2">
     <nav class="navbar navbar-expand-lg bg-dark p-4">
         <div class="container">
             <a class="navbar-brand text-light fw-semibold fs-4"

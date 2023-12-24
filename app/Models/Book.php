@@ -22,19 +22,19 @@ class Book extends Model
         'releaseDate' => 'datetime'
     ];
 
-    public function publisher()
+    public function user()
     {
-        return $this->belongsTo(Publisher::class, 'publisher_id');
-    }
-
-    public function author()
-    {
-        return $this->belongsTo(Author::class, 'author_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function genre()
     {
         return $this->belongsTo(Genre::class, 'genre_id');
+    }
+
+    public function bookContent()
+    {
+        return $this->hasOne(BookContent::class, 'book_id');
     }
 
     public static function boot()
