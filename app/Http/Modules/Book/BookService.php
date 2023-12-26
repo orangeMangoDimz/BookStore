@@ -39,4 +39,9 @@ class BookService
     {
         return $this->repository->getSpecificBook($publisherId);
     }
+
+    public function getBookByUserId($userId)
+    {
+        return $this->repository->getBookByUserId($userId);
+    }
 }

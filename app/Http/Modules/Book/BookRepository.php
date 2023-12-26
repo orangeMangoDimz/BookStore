@@ -36,4 +36,9 @@ class BookRepository
     {
         return Book::where('publisher_id', $publisherId)->get();
     }
+
+    public function getBookByUserId($userId)
+    {
+        return Book::where('user_id', $userId)->get();
+    }
 }

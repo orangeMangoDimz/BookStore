@@ -1,86 +1,111 @@
-<link rel="stylesheet" href="{{ asset('css/detail.css') }}">
+@extends('layout.app')
 
-<div class="container">
-    <div class="row">
-        <div class="col-4" style="position: sticky; top: 0; height: 300px;">
-            <img style="display: inline-block; height:auto; width: 100%; height: 250px; object-fit: cover; object-position: center;"
-                src="{{ $book->image == '' ? 'holder.js/225x250?text=bookCover' : asset('/storage/images/' . $book->image) }}"
-                alt="bookCover">
-            <div class="title my-3 fs-6">
-                <h5 class="text-center fs-5">{{ $book->bookTitle }}</h5>
-                <div class="releaseDateInfo my-1">
-                    <span class="d-inline"><i class="fi fi-rr-calendar"></i></span>
-                    <p class="d-inline ms-2"> {{ date('D-F-Y', strtotime($book->releaseDate)) }}</p>
-                </div>
-            </div>
-        </div>
+@section('title', 'Book Detail')
 
-        <div class="col-8">
-            <div class="accordion" id="synopsis">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-                            aria-controls="panelsStayOpen-collapseOne">
-                            Synopsis
-                        </button>
-                    </h2>
-                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-                        <div class="accordion-body fs-6">
-                            {!! html_entity_decode(implode(' ', json_decode($book->description))) !!}
-                        </div>
-                    </div>
+@section('content')
+    <section class="container my-5">
+        <div class="grid gap-5">
+            <div class="row">
+                <div class="col-3">
+                    <figure class="d-block">
+                        <img src="holder.js/200x200?text=Book Cover" alt="book-cover">
+                    </figure>
+                    <figcaption>
+                        <p class="fs-5">{{ $book->title }}</p>
+                    </figcaption>
                 </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
-                            aria-controls="panelsStayOpen-collapseTwo">
-                            Chapter List
-                        </button>
-                    </h2>
-                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
-                        <div class="accordion-body fs-6">
-                            <strong>This is the second item's accordion body.</strong> It is hidden by default, until
-                            the collapse plugin adds the appropriate classes that we use to style each element. These
-                            classes control the overall appearance, as well as the showing and hiding via CSS
-                            transitions. You can modify any of this with custom CSS or overriding our default variables.
-                            It's also worth noting that just about any HTML can go within the
-                            <code>.accordion-body</code>, though the transition does limit overflow.
+                <div class="col-9">
+                    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                        <div class="container-fluid">
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                                <div class="navbar-nav" id="book-navigation">
+                                    <a class="nav-link fs-5" aria-current="page" href="#">Story Detail</a>
+                                    <a class="nav-link fs-5" href="#">Chapter List</a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
-                            aria-controls="panelsStayOpen-collapseThree">
-                            Accordion Item #3
-                        </button>
-                    </h2>
-                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
-                        <div class="accordion-body fs-6">
-                            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the
-                            collapse plugin adds the appropriate classes that we use to style each element. These
-                            classes control the overall appearance, as well as the showing and hiding via CSS
-                            transitions. You can modify any of this with custom CSS or overriding our default variables.
-                            It's also worth noting that just about any HTML can go within the
-                            <code>.accordion-body</code>, though the transition does limit overflow.
-                        </div>
+                    </nav>
+                    <div id="cotnent" class="my-4 p-3 border border-1 border-black">
+
                     </div>
                 </div>
             </div>
-            {{-- <div class="modal-footer">
-                <a href="#" class="btn btn-primary">Read this book</a>
-            </div> --}}
-            {{-- <a href="{{ route('book.update', $book->id) }}" class="btn btn-warning p-2">Update</a>
-            <form action="{{ route('book.destroy', $book->id) }}" method="POST" class="d-inline">
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-danger p-2">Delete</button>
-            </form> --}}
-        </div>
-    </div>
-</div>
+    </section>
+@endsection
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.8/holder.min.js"></script>
+@section('script')
+    <script>
+        const storyDetailContent = `<div class="mb-4">
+                            <label for="book-title" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="book-title" aria-describedby="emailHelp"
+                                placeholder="Book Title" name="title" value="{{ $book->title }}" disabled>
+                        </div>
+                        <div class="mb-4">
+                            <label for="genre" class="form-label">Gnere</label>
+                            <select id="genre" class="form-select" aria-label="genre" name="genre_id" disabled>
+                                <option selected value="{{ $book->genre->id }}">{{ $book->genre->name }}</option>
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label for="description" class="form-label">Description</label>
+                            <div class="form-control" placeholder="Description" id="description" name="description"
+                                contenteditable="false">
+                                {!! implode(' ', json_decode($book->description)) !!}
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="price" class="form-label">Price</label>
+                            <div class="input-group">
+                                <span class="input-group-text">Rp</span>
+                                <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)"
+                                    name="price" value="{{ $book->price }}" disabled>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="release-date" class="form-label">Release Date</label>
+                            <input type="date" class="form-control w-25" id="release-date" placeholder="Release Date"
+                                name="releaseDate" value="{{ $book->releaseDate }}" disabled>
+                        </div>`;
+
+        const chapterListContent = `  <a href="{{ route('book.content.create', $book->id) }}" class="btn btn-primary">
+                            + Add New Chapter
+                        </a>
+                        @if (!empty($book->bookContent))
+                            <ul>
+                                @foreach ($book->bookContent as $content)
+                                    <li><a href="#">{!! $content->title !!}</a></li>
+                                @endforeach
+                            </ul>
+                        @else
+                            <p>You don't have any chapter yet!</p>
+                        @endif
+                    </div>`;
+
+        window.addEventListener('load', () => {
+            document.querySelector('#cotnent').innerHTML = storyDetailContent;
+        })
+
+        const bookNavigation = document.querySelector('#book-navigation');
+        bookNavigation.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = e.target;
+            if (target.classList.contains('active')) {
+                return;
+            }
+            if (target.innerText === 'Story Detail') {
+                target.classList.add('active');
+                target.nextElementSibling.classList.remove('active');
+                document.querySelector('#cotnent').innerHTML = storyDetailContent;
+            } else {
+                target.classList.add('active');
+                target.previousElementSibling.classList.remove('active');
+                document.querySelector('#cotnent').innerHTML = chapterListContent;
+            }
+        });
+    </script>
+@endsection
