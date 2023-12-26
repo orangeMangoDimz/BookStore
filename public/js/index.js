@@ -10,10 +10,10 @@ main.addEventListener(`click`, (e) => {
                 _token: $('meta[name="csrf-token"]').attr("content"),
             },
             success: (data) => {
-                // this function will implicitly run the detail function from controller
-                $("#bookDetailContent").html(data);
+                $(`#bookDetailContent-${bookID}`).html(data);
             },
             error: (error) => {
+                console.log("Erorr");
                 console.log("Error modal : ", error.responseJSON.message);
             },
         });

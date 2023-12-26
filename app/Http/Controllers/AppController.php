@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\http\Modules\Book\BookService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AppController extends Controller
@@ -17,6 +18,7 @@ class AppController extends Controller
     public function index()
     {
         $books = $this->bookService->getAllBooks();
-        return view('app.index', compact('books'));
+        $currentDate = Carbon::now();
+        return view('app.index', compact(['books', 'currentDate']));
     }
 }

@@ -1,12 +1,51 @@
-div .card{
-    min-height: 425px;  
+div .card {
+    min-height: 425px;
 }
 
-.author{
+.author {
     text-decoration: none;
     color: black;
 }
 
-.author:hover{
+.author:hover {
     color: orange;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.75rem;
+}
+
+p,
+p strong,
+p a,
+a,
+button,
+span,
+label,
+input {
+    font-size: 1.25rem;
+}
+
+label {
+    font-weight: 500;
+    border-left: 2.5px solid black;
+    padding-left: 16px;
+}
+
+.card {
+    background-color: white !important;
+    border: none !important;
+}
+
+.bi {
+    font-size: 1.25rem !important;
+    margin-right: 0.5rem !important;
 }

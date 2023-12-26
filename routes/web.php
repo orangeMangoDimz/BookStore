@@ -24,7 +24,6 @@ Route::get('/', [AppController::class, 'index'])->name('home')->middleware('auth
 // * Book
 Route::middleware('auth')->group(function () {
     Route::get('book/create/', [BookController::class, 'create'])->name('book.create');
-
     Route::post('book/store/', [BookController::class, 'store'])->name('book.store');
     Route::post('book/modal/{id}', [BookController::class, 'modal'])->name('book.modal');
     Route::get("book/read/{id}", [BookController::class, 'read'])->name('book.read');

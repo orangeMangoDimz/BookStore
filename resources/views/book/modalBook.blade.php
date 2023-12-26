@@ -1,16 +1,26 @@
-<link rel="stylesheet" href="{{ asset('css/detail.css') }}">
+<link rel="stylesheet" href="{{ asset('css/index.css') }}">
 
 <div class="container">
     <div class="row">
         <div class="col-4" style="position: sticky; top: 0; height: 300px;">
             <img style="display: inline-block; height:auto; width: 100%; height: 250px; object-fit: cover; object-position: center;"
-                src="{{ $book->image == '' ? 'holder.js/225x250?text=bookCover' : asset('/storage/images/' . $book->image) }}"
+                src="{{ $book->image == '' ? 'holder.js/225x250?text=bookCover' : asset('images/bookCover/' . $book->image) }}"
                 alt="bookCover">
-            <div class="title my-3 fs-6">
-                <h5 class="text-center fs-5">{{ $book->bookTitle }}</h5>
-                <div class="releaseDateInfo my-1">
-                    <span class="d-inline"><i class="fi fi-rr-calendar"></i></span>
-                    <p class="d-inline ms-2"> {{ date('D-F-Y', strtotime($book->releaseDate)) }}</p>
+            <div class="my-3">
+                <div class="my-1">
+                    {{ $book->title }}
+                </div>
+                <div class="my-1">
+                    <span>
+                        <i class="bi bi-person"></i>
+                        {{ $book->user->name }}
+                    </span>
+                </div>
+                <div class="my-1">
+                    <span>
+                        <i class="bi bi-calendar"></i>
+                        {{ date('D-F-Y', strtotime($book->releaseDate)) }}
+                    </span>
                 </div>
             </div>
         </div>
@@ -21,13 +31,13 @@
                     <h2 class="accordion-header">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
                             data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-                            aria-controls="panelsStayOpen-collapseOne">
+                            aria-controls="panelsStayOpen-collapseOne" style="font-size: 1.25rem;">
                             Synopsis
                         </button>
                     </h2>
                     <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-                        <div class="accordion-body fs-6">
-                            {!! html_entity_decode(implode(' ', json_decode($book->description))) !!}
+                        <div style="font-size: 1.25rem;" class="accordion-body">
+                            {!! implode(' ', json_decode($book->description)) !!}
                         </div>
                     </div>
                 </div>
@@ -35,23 +45,28 @@
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
-                            aria-controls="panelsStayOpen-collapseTwo">
+                            aria-controls="panelsStayOpen-collapseTwo" style="font-size: 1.25rem;">
                             Chapter List
                         </button>
                     </h2>
                     <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
-                        <div class="accordion-body fs-6">
-                            <ul>
-                                @foreach ($book->bookContent as $content)
-                                    <li>
-                                        <a href="#">{!! $content->title !!}</a>
-                                    </li>
-                                @endforeach
-                            </ul>
+                        <div class="accordion-body">
+                            @if ($book->bookContent->isEmpty())
+                                <p class="text-start">No Chapter Available</p>
+                            @else
+                                <ul>
+                                    @foreach ($book->bookContent as $content)
+                                        <li>
+                                            <a href="{{ route('book.read', $book->id) }}"
+                                                class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">{!! $content->title !!}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @endif
                         </div>
                     </div>
                 </div>
-                <div class="accordion-item">
+                {{-- <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
@@ -69,17 +84,8 @@
                             <code>.accordion-body</code>, though the transition does limit overflow.
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
-            {{-- <div class="modal-footer">
-                <a href="#" class="btn btn-primary">Read this book</a>
-            </div> --}}
-            {{-- <a href="{{ route('book.update', $book->id) }}" class="btn btn-warning p-2">Update</a>
-            <form action="{{ route('book.destroy', $book->id) }}" method="POST" class="d-inline">
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-danger p-2">Delete</button>
-            </form> --}}
         </div>
     </div>
 </div>

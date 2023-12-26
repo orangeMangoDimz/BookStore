@@ -9,4 +9,9 @@ class BookContentRepository
     {
         BookContent::create($data);
     }
+
+    public function getBookContentById($book_id)
+    {
+        return BookContent::where('book_id', $book_id)->first();
+    }
 }

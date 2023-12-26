@@ -12,4 +12,9 @@ class BookContentService
     {
         $this->repository->store($data);
     }
+
+    public function getBookContentById($book_id)
+    {
+        return $this->repository->getBookContentById($book_id);
+    }
 }

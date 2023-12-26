@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\http\Modules\Genre\GenreService;
 use App\Http\Requests\BookValidation;
 use App\http\Modules\Book\BookService;
+use App\http\Modules\BookContent\BookContentService;
 use App\Http\Modules\Publisher\PublisherService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class BookController extends Controller
 {
 
-    public function __construct(protected BookService $service, protected GenreService $genreService) {}
+    public function __construct(protected BookService $service, protected GenreService $genreService, protected BookContentService $bookContentService) {}
 
     public function create(){
         $genres = $this->genreService->getAllGenre();
@@ -24,14 +25,13 @@ class BookController extends Controller
     {
         $validated = $request->validated();
         $imageName = time().'.'.$request->image->extension();
-        $request->image->move(public_path('images'), $imageName);
+        $request->image->move(public_path('images/bookCover/'), $imageName);
         $validated['image'] = $imageName;
         $array = explode("\r", $validated['description']); // Split by newline character
         $validated['description'] = json_encode($array);
         $validated['user_id'] = Auth::user()->id;
         $book = $this->service->storeBook($validated);
         return redirect()->route('book.content.detail', $book->id);
-        // return redirect()->route('book.create.content' , $book->id);
     }
 
     public function modal($id)
@@ -46,10 +46,11 @@ class BookController extends Controller
         return view('book.updateBook', compact(['book', 'publishers']));
     }
 
-    public function read($id)
+    public function read($book_id)
     {
-        $book = $this->service->getBookById($id);
-        return view('book.readBook', compact('book'));
+        $book = $this->service->getBookById($book_id);
+        $bookContent = $this->bookContentService->getBookContentById($book_id);
+        return view('book.readBook', compact(['book' , 'bookContent']));
     }
 
     public function update($id, BookValidation $request)
