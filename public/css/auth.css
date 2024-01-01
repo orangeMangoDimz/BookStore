@@ -1,0 +1,58 @@
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.75rem;
+}
+
+p,
+p strong,
+p a,
+a,
+button,
+span,
+label,
+input {
+    font-size: 1rem;
+}
+
+label {
+    font-weight: semibold;
+}
+@media only screen and (min-width: 1px) {
+    section {
+        min-height: 100vh;
+    }
+    .container {
+        height: 100vh;
+    }
+    .card {
+        height: 100%;
+        padding: 1rem !important;
+        border-radius: 0 !important;
+        border: none !important;
+    }
+}
+
+@media only screen and (min-width: 576px) {
+    .container {
+        height: auto;
+    }
+    .card {
+        height: 100%;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .container {
+        height: auto;
+        max-width: 720px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+}

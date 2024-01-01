@@ -24,17 +24,17 @@ class UserValidation extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => [Rule::when(request()->routeIs('user.store'), 'required')],
+            'name' => [Rule::when(request()->routeIs('user.store'), 'bail|required')],
             'email' => [
                 'required', 'email',
-                Rule::when(request()->routeIs('user.search'), 'exists:users,email')
+                Rule::when(request()->routeIs('user.search'), 'bail|exists:users,email')
             ],
             'password' => [
                 'required', 'min:6',
-                Rule::when(request()->routeIs('user.store'), 'confirmed')
+                Rule::when(request()->routeIs('user.store'), 'bail|confirmed')
             ],
             'terms' => [
-                Rule::when(request()->routeIs('user.store'), 'accepted')
+                Rule::when(request()->routeIs('user.store'), 'bail|accepted')
             ]        ];
     }
 }
