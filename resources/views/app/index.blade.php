@@ -7,136 +7,79 @@
 @endsection
 
 @section('content')
-    <section class="container mt-5 mb-5 fs-5 ">
-        <div class="title-box mb-4 text-center">
+    <section class="container my-3 px-3">
+        <div class="title-box text-center d-flex flex-column justify-content-center align-items-center">
             <h1>Explore the Creativity Without Limit</h1>
             <p class="fw-light">GeniusBook is the perfect place to <strong>explore, create, and publish</strong> your own
                 book without limit.</p>
-            <div class="d-flex align-items-center justify-content-center">
-                <form class="d-flex g-3 w-50 my-4 shadow-sm bg-body-tertiary rounded" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search for a book ..." aria-label="Search">
-                </form>
-            </div>
+            <form id="search-box" class="shadow-sm bg-body-tertiary rounded w-50" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search for a book ..." aria-label="Search">
+            </form>
         </div>
 
-        <div class="py-3">
+        <div class="my-5">
             <h3>Top Trending Books This Month</h3>
-            <div class="py-3">
-                <div class="d-flex flex-wrap justify-content-center">
-                    <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-                        <div class="d-flex flex-wrap justify-content-start gap-4" data-bs-interval="10000">
-                            @foreach ($books as $book)
-                                <div class="card shadow-sm p-3 bg-body-tertiary rounded" style="width: 400px;">
-                                    <div class="bookCover d-flex align-items-center justify-content-center">
-                                        <img style="display: inline-block; height: 250px; object-fit: cover; object-position: center;"
-                                            src="{{ $book->image == '' ? 'holder.js/285x250?text=BookCover' : asset('images/bookCover/' . $book->image) }}"
-                                            class="card-img-top" alt="book-preview">
-                                    </div>
-                                    <div class="card-body">
-                                        <h4 class="card-title">{{ $book->title }}</h4>
-                                        <span>
-                                            <i class="bi bi-person"></i>
-                                            <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-                                                href="#">{{ $book->user->name }}</a>
-                                        </span>
-                                        <p class="card-text m-0">
-                                            {!! strlen(implode(' ', json_decode($book->description))) > 150
-                                                ? mb_strimwidth(html_entity_decode(implode(' ', json_decode($book->description))), 0, 150, '...')
-                                                : html_entity_decode(implode(' ', json_decode($book->description))) !!}
-                                        </p>'
-                                        <!-- Modal -->
-                                        <div class="modal fade modal-lg" id="bookDetail-{{ $book->id }}" tabindex="-1"
-                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h3 class="modal-title" id="exampleModalLabel">Book
-                                                            Description</h3>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body" id="bookDetailContent-{{ $book->id }}">
-                                                        {{-- list of content --}}
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <a href="{{ route('book.content.detail', $book->id) }}"
-                                                            type="button" class="btn btn-primary">Read
-                                                            More</a>
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Close</button>
-                                                    </div>
-                                                </div>
+            <div class="my-3">
+                <div id="card-wrapper" class="d-flex flex-wrap justify-content-evenly align-items-center flex-row gap-4"
+                    data-bs-interval="10000">
+                    @foreach ($books as $book)
+                        <div class="card shadow-sm bg-body-tertiary rounded" style="width: 400px;">
+                            <div class="bookCover d-flex align-items-center justify-content-center">
+                                <img style="display: inline-block; height: 250px; object-fit: cover; object-position: center;"
+                                    src="{{ $book->image == '' ? 'holder.js/285x250?text=BookCover' : asset('images/bookCover/' . $book->image) }}"
+                                    class="card-img-top" alt="book-preview">
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">{{ $book->title }}</h4>
+                                <span>
+                                    <i class="bi bi-person"></i>
+                                    <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                                        href="#">{{ $book->user->name }}</a>
+                                </span>
+                                <p class="card-text m-0">
+                                    {!! strlen(implode(' ', json_decode($book->description))) > 150
+                                        ? mb_strimwidth(html_entity_decode(implode(' ', json_decode($book->description))), 0, 150, '...')
+                                        : html_entity_decode(implode(' ', json_decode($book->description))) !!}
+                                </p>'
+                                <!-- Modal -->
+                                <div class="modal fade modal-lg" id="bookDetail-{{ $book->id }}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h3 class="modal-title" id="exampleModalLabel">Book
+                                                    Description</h3>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        <p class="fw-light m-0 my-3">{{ $book->releaseDate->diffForHumans($currentDate) }}
-                                        </p>
-                                        <button type="button" class="bookDetailBtn btn btn-primary p-2 w-100"
-                                            data-bs-toggle="modal" data-bs-target="#bookDetail-{{ $book->id }}"
-                                            data-bookId={{ $book->id }}>
-                                            View Book Detail
-                                        </button>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        {{-- <h3>See More Books</h3>
-        <div class="card py-3 rounded">
-            <div class="d-flex flex-wrap justify-content-evenly">
-                @foreach ($books as $book)
-                    <div class="card my-2" style="width: 18rem;">
-                        <div class="bookCover d-flex align-items-center justify-content-center">
-                            <img style="display: inline-block; height: 250px; object-fit: cover; object-position: center;"
-                                src="{{ $book->image == '' ? 'holder.js/285x250?text=BookCover' : asset('/storage/images/' . $book->image) }}"
-                                class="card-img-top" alt="book-preview">
-                        </div>
-                        <div class="card-body">
-                            <h4 class="card-title">{{ $book->bookTitle }}</h4>
-                            <p class="card-text fs-6 fw-semibold">By: <a class="user"
-                                    href="#">{{ $book->user->name }}</a></p>
-                            <p class="card-text fs-6 mt-2">
-                                {!! strlen(implode(' ', json_decode($book->description))) > 150
-                                    ? mb_strimwidth(implode('\n', json_decode($book->description)), 0, 150, '...')
-                                    : implode(' ', json_decode($book->description)) !!}
-                            </p>
-                            <div class="modal fade modal-lg" id="bookDetail" tabindex="-1"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Book Description</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body" id="bookDetailContent">
-                                        </div>
-                                        <div class="modal-footer">
-                                            <a href="{{ route('book.read', $book->id) }}" type="button"
-                                                class="btn btn-primary">Read
-                                                More</a>
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Close</button>
+                                            <div class="modal-body" id="bookDetailContent-{{ $book->id }}">
+                                                {{-- list of content --}}
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="{{ route('book.content.detail', $book->id) }}" type="button"
+                                                    class="btn btn-primary">Read
+                                                    More</a>
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="card-footer">
+                                <p class="fw-light m-0 my-3">{{ $book->releaseDate->diffForHumans($currentDate) }}
+                                </p>
+                                <button type="button" class="bookDetailBtn btn btn-outline-dark p-2 w-100"
+                                    data-bs-toggle="modal" data-bs-target="#bookDetail-{{ $book->id }}"
+                                    data-bookId={{ $book->id }}>
+                                    View Book Detail
+                                </button>
+                            </div>
                         </div>
-                        <div class="card-footer mb-3">
-                            <button type="button" class="bookDetailBtn btn btn-primary p-2 w-100" data-bs-toggle="modal"
-                                data-bs-target="#bookDetail" data-bookId={{ $book->id }}>
-                                View Book Detail
-                            </button>
-                        </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
             </div>
-        </div> --}}
+        </div>
     </section>
     <div class="container my-3">
         {{ $books->onEachSide(5)->links() }}

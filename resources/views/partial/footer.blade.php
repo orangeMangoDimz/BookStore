@@ -1,6 +1,6 @@
 <footer class="text-center text-lg-start text-white bg-dark">
     <div class="container text-center text-md-start">
-        <div class="row">
+        <div class="d-flex justify-content-center flex-row align-items-center p-3 flex-wrap">
             <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 mt-5">
                 <h6 class="text-uppercase fw-bold">GeniusBook</h6>
                 <hr class="mb-4 mt-0 d-inline-block mx-auto"

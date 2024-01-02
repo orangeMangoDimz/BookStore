@@ -1,0 +1,44 @@
+@media only screen and (min-width: 1px) {
+    #search-box {
+        width: 100% !important;
+    }
+    #search-box {
+        width: 100%;
+    }
+    #offcanvas {
+        display: block !important;
+    }
+    #title {
+        display: none !important;
+    }
+    #wrapper {
+        display: none !important;
+    }
+    #name {
+        display: none !important;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    #search-box {
+        width: 50% !important;
+    }
+    #offcanvas {
+        display: none !important;
+    }
+    #title {
+        display: inline !important;
+    }
+    #wrapper {
+        display: flex !important;
+    }
+    #name {
+        display: inline !important;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    #card-wrapper {
+        justify-content: space-between !important;
+    }
+}
