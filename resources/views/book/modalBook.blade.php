@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+<link rel="stylesheet" href="{{ asset('css/modal.css') }}">
 
 <div class="container">
     <div class="row">
@@ -6,14 +7,21 @@
             <img style="display: inline-block; height:auto; width: 100%; height: 250px; object-fit: cover; object-position: center;"
                 src="{{ $book->image == '' ? 'holder.js/225x250?text=bookCover' : asset('images/bookCover/' . $book->image) }}"
                 alt="bookCover">
-            <div class="my-3">
+            <div id="detail-info" class="my-3">
                 <div class="my-1">
-                    {{ $book->title }}
+                    <h3 class="d-inline text-dark fw-semibold fs-4">{{ $book->title }}</h3>
                 </div>
                 <div class="my-1">
                     <span>
                         <i class="bi bi-person"></i>
-                        {{ $book->user->name }}
+                        <a class="d-inline text-dark" style="text-decoration: none;"
+                            href="#">{{ $book->user->name }}</a>
+                    </span>
+                </div>
+                <div class="my-1">
+                    <span>
+                        <i class="bi bi-journal"></i>
+                        <p class="d-inline text-dark" href="#">{{ $book->genre->name }}</p>
                     </span>
                 </div>
                 <div class="my-1">

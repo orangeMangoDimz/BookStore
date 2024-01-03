@@ -1,8 +1,11 @@
-.author, .publisher{
-    text-decoration: none;
-    color: black;
+.confirm-button-class {
+    background-color: white !important;
+    border: 0.1px solid #3085d6 !important;
+    color: #3085d6 !important;
+    box-shadow: none !important;
 }
 
-.publisher:hover{
-    color: orange;
+.confirm-button-class:hover {
+    background-color: #3085d6 !important;
+    color: white !important;
 }

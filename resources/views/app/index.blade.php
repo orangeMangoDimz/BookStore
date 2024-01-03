@@ -31,11 +31,17 @@
                             </div>
                             <div class="card-body">
                                 <h4 class="card-title">{{ $book->title }}</h4>
-                                <span>
-                                    <i class="bi bi-person"></i>
-                                    <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-                                        href="#">{{ $book->user->name }}</a>
-                                </span>
+                                <div class="my-3 d-flex justify-content-between align-items-center flex-row">
+                                    <div>
+                                        <i class="bi bi-person"></i>
+                                        <a class="text-dark" href="#"
+                                            style="text-decoration: none;">{{ $book->user->name }}</a>
+                                    </div>
+                                    <div>
+                                        <i class="bi bi-journal"></i>
+                                        <p class="d-inline text-dark" href="#">{{ $book->genre->name }}</p>
+                                    </div>
+                                </div>
                                 <p class="card-text m-0">
                                     {!! strlen(implode(' ', json_decode($book->description))) > 150
                                         ? mb_strimwidth(html_entity_decode(implode(' ', json_decode($book->description))), 0, 150, '...')
@@ -57,9 +63,9 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <a href="{{ route('book.content.detail', $book->id) }}" type="button"
-                                                    class="btn btn-primary">Read
+                                                    class="btn btn-outline-dark">Read
                                                     More</a>
-                                                <button type="button" class="btn btn-secondary"
+                                                <button type="button" class="btn btn-dark"
                                                     data-bs-dismiss="modal">Close</button>
                                             </div>
                                         </div>

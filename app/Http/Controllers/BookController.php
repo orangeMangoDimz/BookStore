@@ -43,7 +43,8 @@ class BookController extends Controller
     public function edit(Request $request)
     {
         $book = $this->service->getBookById($request->id);
-        return view('book.updateBook', compact(['book', 'publishers']));
+        $genres = $this->genreService->getAllGenre();
+        return view('book.updateBook', compact(['book', 'genres']));
     }
 
     public function read($book_id)
@@ -68,7 +69,7 @@ class BookController extends Controller
     {
         $deleted = $this->service->deleteBook($id);
         return $deleted
-            ? redirect()->back()
+            ? redirect()->route('home')
             : redirect()->back();
     }
 

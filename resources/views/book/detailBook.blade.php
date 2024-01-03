@@ -4,6 +4,7 @@
 
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/detail.css') }}">
 @endsection
 
 @section('content')
@@ -31,6 +32,16 @@
                             </span>
                         </div>
                     </figcaption>
+                    <div class="my-3 d-flex justify-content-start flex-wrap flex-row align-items-center gap-3">
+                        <a href="{{ route('book.edit', $book->id) }}" class="btn btn-outline-primary"><i
+                                class="bi bi-pencil" style="margin-right: 0 !important;"></i></a>
+                        <form action="{{ route('book.destroy', $book->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-outline-danger" id="deleteBtn"><i class="bi bi-trash3"
+                                    style="margin-right: 0 !important;"></i></button>
+                        </form>
+                    </div>
                 </div>
                 <div class="col-9">
                     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -48,7 +59,7 @@
                             </div>
                         </div>
                     </nav>
-                    <div id="cotnent" class="m-0 p-3 shadow-sm bg-body-tertiary rounded">
+                    <div id="cotnent" class="m-0 p-3 shadow-sm bg-body-white rounded">
                         {{-- Content of nav tab --}}
                     </div>
                 </div>
@@ -73,7 +84,7 @@
                         <div class="mb-4">
                             <label for="description" class="form-label">Description</label>
                             <div class="form-control" placeholder="Description" id="description" name="description"
-                                contenteditable="false" style="font-size: 1.25rem;">
+                                contenteditable="false" style="font-size: 1.25rem; border:none;">
                                 {!! implode(' ', json_decode($book->description)) !!}
                             </div>
                         </div>
@@ -137,6 +148,35 @@
                 target.style.fontWeight = "500";
                 document.querySelector("#cotnent").innerHTML = chapterListContent;
             }
+        });
+
+        const deleteBtn = document.querySelector("#deleteBtn");
+        deleteBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            console.log("clicked");
+            Swal.fire({
+                title: "Are you sure want to delete this book?",
+                text: "All the cahpter will be deleted too!",
+                icon: "warning",
+                showCancelButton: true,
+                cancelButtonColor: "#d33",
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: "Yes",
+                customClass: {
+                    confirmButton: "confirm-button-class"
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "The book has been deleted!",
+                        icon: "success"
+                    });
+                    setTimeout(() => {
+                        e.target.parentElement.submit();
+                    }, 1500);
+                }
+            });
         });
     </script>
 @endsection
