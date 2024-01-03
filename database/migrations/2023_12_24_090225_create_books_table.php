@@ -18,8 +18,7 @@ return new class extends Migration
             $table->uuid('genre_id');
             $table->string('title');
             $table->text('description');
-            $table->integer('price');
-            $table->dateTime('releaseDate');
+            $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('genre_id')->references('id')->on('genres')->onUpdate('cascade')->onDelete('cascade');

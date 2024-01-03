@@ -12,11 +12,9 @@ class Book extends Model
 
     // ! Note :
     // * When using the UUID, also use the $keyType, $incrementing, and boot function
-    // * Book doesn't have timestamp, so mae sure it has false value
 
     protected $keyType = 'string';
     public $incrementing = false;
-    public $timestamps = false;
     protected $guarded = ['id'];
     protected $casts = [
         'releaseDate' => 'datetime'

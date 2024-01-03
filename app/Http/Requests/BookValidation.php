@@ -27,8 +27,6 @@ class BookValidation extends FormRequest
             'title' => ['required'],
             'description' => ['required'],
             'genre_id' => ['required', 'exists:genres,id'],
-            'price' => ['required', 'integer'],
-            'releaseDate' => ['required', 'date']
         ];
     }
 }

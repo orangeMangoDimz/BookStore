@@ -30,6 +30,7 @@ class BookController extends Controller
         $array = explode("\r", $validated['description']); // Split by newline character
         $validated['description'] = json_encode($array);
         $validated['user_id'] = Auth::user()->id;
+        $validated['created_at'] = time();
         $book = $this->service->storeBook($validated);
         return redirect()->route('book.content.detail', $book->id);
     }
@@ -56,13 +57,18 @@ class BookController extends Controller
 
     public function update($id, BookValidation $request)
     {
-        echo 'test';
-        // $book = $request->validated();
-        // $updated = $this->service->updateBook($id, $book);
-        // echo $updated;
-        // return $updated
-        // ? redirect(route('home'))
-        // : redirect()->back();
+        $validated = $request->validated();
+        $imageName = time().'.'.$request->image->extension();
+        $request->image->move(public_path('images/bookCover/'), $imageName);
+        $validated['image'] = $imageName;
+        $array = explode("\r", $validated['description']); // Split by newline character
+        $validated['description'] = json_encode($array);
+        $validated['user_id'] = Auth::user()->id;
+        $validated['created_at'] = time();
+        $updated = $this->service->updateBook($id, $validated);
+        return $updated
+        ? redirect(route('book.content.detail', $id))
+        : redirect()->back()->withErrors(["message" => "Woops, something went wrong!"]);
     }
 
     public function destroy($id)

@@ -2,10 +2,19 @@
 
 @section('title', 'Add a Book')
 
+@section('style')
+    <link rel="stylesheet" href="{{ asset('css/book.css') }}">
+    <style>
+        .tox-statusbar {
+            display: none !important;
+        }
+    </style>
+@endsection
+
 @section('content')
-    <main class="container mt-5 mb-5">
+    <main class="container my-5 px-4">
         <div class="title-box mb-4">
-            <h2>Add Your Own Story</h2>
+            <h2>Add Your Own Book</h2>
             <hr>
         </div>
 
@@ -13,8 +22,8 @@
             @csrf
             <div class="mb-4">
                 <label for="book-title" class="d-block form-label">Cover</label>
-                <img style="display: inline-block;" src="holder.js/200x200?text=Book Cover" class="rounded mb-3"
-                    id="imgPrev">
+                <img style="display: inline-block; object-fit: cover;" src="holder.js/200x200?text=Book Cover"
+                    class="rounded mb-3" id="imgPrev">
                 <input type="file" class="imgUpload form-control" id="book-title" aria-describedby="emailHelp"
                     placeholder="Book Title" name="image" accept="image/*">
             </div>
@@ -48,25 +57,10 @@
                     <div class="alert alert-danger mt-3">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="mb-4">
-                <label for="price" class="form-label">Price</label>
-                <div class="input-group">
-                    <span class="input-group-text">Rp</span>
-                    <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="price">
-                </div>
-                @error('price')
-                    <div class="alert alert-danger mt-3">{{ $message }}</div>
-                @enderror
+            <div class="d-flex justify-content-start align-items-center gap-3">
+                <a href="{{ route('home') }}" class="btn btn-danger">Cancel</a>
+                <button type="submit" class="btn btn-outline-dark"><i class="bi bi-plus me-2 fw-bold"></i>Add</button>
             </div>
-            <div class="mb-4">
-                <label for="release-date" class="form-label">Release Date</label>
-                <input type="date" class="form-control w-25" id="release-date" placeholder="Release Date"
-                    name="releaseDate">
-                @error('releaseDate')
-                    <div class="alert alert-danger mt-3">{{ $message }}</div>
-                @enderror
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </main>
 @endsection
@@ -92,6 +86,7 @@
         tinymce.init({
             selector: 'textarea#description',
             menubar: false,
+            content_style: "p { font-size: 1rem; line-height: 1rem;  }"
         });
     </script>
 @endsection

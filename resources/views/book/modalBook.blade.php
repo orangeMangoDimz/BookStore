@@ -27,7 +27,7 @@
                 <div class="my-1">
                     <span>
                         <i class="bi bi-calendar"></i>
-                        {{ date('D-F-Y', strtotime($book->releaseDate)) }}
+                        <p class="d-inline text-dark" href="#">{{ $book->created_at->format('l, jS F Y') }}</p>
                     </span>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                         </button>
                     </h2>
                     <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-                        <div style="font-size: 1.25rem;" class="accordion-body">
+                        <div style="font-size: 1rem;" class="accordion-body">
                             {!! implode(' ', json_decode($book->description)) !!}
                         </div>
                     </div>

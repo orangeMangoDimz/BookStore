@@ -27,14 +27,20 @@
                         </div>
                         <div>
                             <span>
+                                <i class="bi bi-journal"></i>
+                                <p class="d-inline text-dark" href="#">{{ $book->genre->name }}</p>
+                            </span>
+                        </div>
+                        <div>
+                            <span>
                                 <i class="bi bi-calendar"></i>
-                                {{ date('D-F-Y', strtotime($book->releaseDate)) }}
+                                <p class="d-inline text-dark">{{ $book->created_at->format('l, jS F Y') }}</p>
                             </span>
                         </div>
                     </figcaption>
                     <div class="my-3 d-flex justify-content-start flex-wrap flex-row align-items-center gap-3">
-                        <a href="{{ route('book.edit', $book->id) }}" class="btn btn-outline-primary"><i
-                                class="bi bi-pencil" style="margin-right: 0 !important;"></i></a>
+                        <a href="{{ route('book.edit', $book->id) }}" class="btn btn-outline-dark"><i class="bi bi-pencil"
+                                style="margin-right: 0 !important;"></i></a>
                         <form action="{{ route('book.destroy', $book->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
@@ -96,7 +102,7 @@
                                 </div>
                                 <div class="mb-4">
                                     <label for="release-date" class="form-label">Release Date</label>
-                                    <p class="ms-4">{{ date('D-F-Y', strtotime($book->releaseDate)) }}</p>
+                                    <p class="ms-4">{{ $book->created_at->format('l, jS F Y') }}</p>
                         </div>`;
 
         const chapterListContent = `
@@ -113,8 +119,8 @@
                             <p>It looks like this book doesn't have any chapter yet!</p>
                         @endif
                         @if (Auth::check() && Auth::user()->id == $book->user_id)
-                        <a href="{{ route('book.content.create', $book->id) }}" class="btn btn-primary">
-                            + Add New Chapter
+                        <a href="{{ route('book.content.create', $book->id) }}" class="btn btn-outline-dark">
+                            <i class="bi bi-plus me-2 fw-bold"></i> Add New Chapter
                             @endif
                         </a>
                     </div>`;
@@ -122,7 +128,7 @@
         window.addEventListener("load", () => {
             document.querySelector("#cotnent").innerHTML = storyDetailContent;
             const activeTabNav = document.querySelector('a[class^="active"]');
-            activeTabNav.style.borderBottom = "2px solid blue";
+            activeTabNav.style.borderBottom = "2px solid black";
             activeTabNav.style.fontWeight = "500";
         });
 
@@ -135,7 +141,7 @@
             }
             if (target.innerText === "Book Detail") {
                 target.classList.add("active");
-                target.style.borderBottom = "2px solid blue";
+                target.style.borderBottom = "2px solid black";
                 target.style.fontWeight = "500";
                 target.nextElementSibling.removeAttribute("style");
                 target.nextElementSibling.classList.remove("active");
@@ -144,7 +150,7 @@
                 target.classList.add("active");
                 target.previousElementSibling.classList.remove("active");
                 target.previousElementSibling.removeAttribute("style");
-                target.style.borderBottom = "2px solid blue";
+                target.style.borderBottom = "2px solid black";
                 target.style.fontWeight = "500";
                 document.querySelector("#cotnent").innerHTML = chapterListContent;
             }

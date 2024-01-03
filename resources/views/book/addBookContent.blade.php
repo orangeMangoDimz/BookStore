@@ -7,7 +7,7 @@
         <form action="{{ route('book.content.store') }}" method="POST">
             @csrf
             <input type="hidden" value="{{ $id }}" name="book_id">
-            <div class="p-3 text-center" id="title">
+            <div class="p-3 text-center" id="mytitle">
                 <p>My Book Title</p>
             </div>
 
@@ -17,12 +17,12 @@
                 <p>My Book Content ...</p>
             </div>
 
-            <div class="d-flex flex-row gap-3 justify-content-end border-top border-4">
+            <div class="d-flex flex-row gap-3 justify-start-end border-top border-4">
                 <div class="my-4">
                     <a href="{{ route('home') }}" class="btn btn-danger me-2">
                         Cancel
                     </a>
-                    <button type="submit" class="btn btn-success">
+                    <button type="submit" class="btn btn-outline-dark">
                         Save
                     </button>
                 </div>
@@ -37,18 +37,17 @@
             outline: none;
         }
 
-        #title:focus {
+        #mytitle:focus {
             outline: none;
         }
 
-        #title p {
+        #mytitle p {
             font-size: 2rem;
         }
 
         #content p {
             font-size: 1.5rem;
             line-height: 1.2rem;
-
         }
     </style>
 @endsection
@@ -56,22 +55,21 @@
 @section('script')
     <script>
         tinymce.init({
-            selector: '#title',
+            selector: '#mytitle',
             menubar: false,
             inline: true,
-            toolbar: 'bold italic',
+            toolbar: false,
+            plugins: 'quickbars',
             content_style: 'strong, em, u { font-size: 2rem; }',
         });
-
 
         tinymce.init({
             selector: '#content',
             menubar: false,
             inline: true,
+            plugins: 'image quickbars table link',
+            toolbar: false,
             content_style: 'strong, em, u { font-size: 1.5rem; }',
-            plugins: 'image',
-            toolbar: true,
-            imagetools_toolbar: 'rotateleft rotateright | flipv fliph | editimage imageoptions'
         });
     </script>
 @endsection

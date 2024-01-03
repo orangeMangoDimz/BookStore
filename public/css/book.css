@@ -7,19 +7,6 @@
     font-family: "Roboto", sans-serif;
 }
 
-div .card {
-    height: 600px;
-}
-
-.author {
-    text-decoration: none;
-    color: black;
-}
-
-.author:hover {
-    color: orange;
-}
-
 h1 {
     font-size: 2.5rem;
 }
@@ -53,28 +40,4 @@ input {
 
 label {
     font-weight: 500;
-    border-left: 2.5px solid black;
-    padding-left: 16px;
-}
-
-.card {
-    background-color: white !important;
-    border: none !important;
-}
-
-.bi {
-    font-size: 1.25rem !important;
-    margin-right: 0.5rem !important;
-}
-
-@media only screen and (min-width: 1px) {
-    div .card {
-        height: auto;
-    }
-}
-
-@media only screen and (min-width: 768px) {
-    div .card {
-        height: 600px;
-    }
 }

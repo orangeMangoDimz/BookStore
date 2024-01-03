@@ -35,8 +35,7 @@ class BookFactory extends Factory
             'user_id' => fake()->randomElement($userIds),
             'genre_id' => fake()->randomElement($genreIds),
             'description' => json_encode($paragraph),
-            'releaseDate' => Carbon::createFromDate(2023, 5, 13)->toDateTimeString(),
-            'price' => rand(5000, 100000)
+            'created_at' => Carbon::createFromDate(2023, 5, 13)->toDateTimeString(),
         ];
     }
 }

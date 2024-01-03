@@ -23,7 +23,6 @@ class BookRepository
 
     public function updateBook(string $id, array $data): bool
     {
-        $data['releaseDate'] = Carbon::parse($data['releaseDate'])->toDateTimeString();
         return Book::where('id', $id)->update($data);
     }
 
