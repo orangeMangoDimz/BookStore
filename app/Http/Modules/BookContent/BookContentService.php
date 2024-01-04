@@ -8,13 +8,13 @@ class BookContentService
 {
     public function __construct(protected BookContentRepository $repository) {}
 
-    public function store(array $data)
+    public function store(array $data): bool
     {
-        $this->repository->store($data);
+        return $this->repository->store($data);
     }
 
-    public function getBookContentById($book_id)
+    public function getBookContentById($id)
     {
-        return $this->repository->getBookContentById($book_id);
+        return $this->repository->getBookContentById($id);
     }
 }

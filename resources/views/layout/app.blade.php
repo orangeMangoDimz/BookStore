@@ -22,6 +22,7 @@
     {{-- additional style section --}}
     @yield('style')
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="icon" href="{{ asset('images/logo/logo.jpeg') }}">
 
     {{-- flatticon --}}
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>

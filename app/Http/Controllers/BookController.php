@@ -7,6 +7,7 @@ use App\Http\Requests\BookValidation;
 use App\http\Modules\Book\BookService;
 use App\http\Modules\BookContent\BookContentService;
 use App\Http\Modules\Publisher\PublisherService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -48,10 +49,10 @@ class BookController extends Controller
         return view('book.updateBook', compact(['book', 'genres']));
     }
 
-    public function read($book_id)
+    public function read($id)
     {
-        $book = $this->service->getBookById($book_id);
-        $bookContent = $this->bookContentService->getBookContentById($book_id);
+        $bookContent = $this->bookContentService->getBookContentById($id);
+        $book = $this->service->getBookById($bookContent->book_id);
         return view('book.readBook', compact(['book' , 'bookContent']));
     }
 
@@ -64,7 +65,7 @@ class BookController extends Controller
         $array = explode("\r", $validated['description']); // Split by newline character
         $validated['description'] = json_encode($array);
         $validated['user_id'] = Auth::user()->id;
-        $validated['created_at'] = time();
+        $validated['updated_at'] = Carbon::now( );
         $updated = $this->service->updateBook($id, $validated);
         return $updated
         ? redirect(route('book.content.detail', $id))
@@ -83,5 +84,12 @@ class BookController extends Controller
     {
         $books = $this->service->getBookById($id);
         return view('book.content', compact('books'));
+    }
+
+    public function search(Request $request)
+    {
+        $books = $this->service->searchBook($request->input('keyword'));
+        $currentDate = Carbon::now();
+        return view('app.index', compact(['books', 'currentDate']));
     }
 }

@@ -51,7 +51,7 @@
                 </div>
             </div>
 
-            <a id="title" class="navbar-brand text-dark fw-semibold"
+            <a id="logo" class="navbar-brand text-dark fw-semibold"
                 href="{{ auth()->user()->role == 'admin' ? route('admin.dashboard') : route('home') }}">BookStore</a>
             <div id="wrapper" class="d-flex flex-row gap-5 justify-content-center align-items-center">
                 <span>
@@ -74,8 +74,8 @@
                                 </button>
                                 <ul class="dropdown-menu mt-3">
                                     <li>
-                                        <a href="{{ route('profile', auth()->user()->id) }}"
-                                            class="dropdown-item">Profile</a>
+                                        {{-- <a href="{{ route('profile', auth()->user()->id) }}" --}}
+                                        <a href="{{ route('maintenance') }}" class="dropdown-item">Profile</a>
                                     </li>
                                     <li>
                                         <form action="{{ route('logout') }}" method="POST">

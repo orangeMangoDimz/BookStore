@@ -3,7 +3,7 @@ main.addEventListener(`click`, (e) => {
     if (e.target.classList.contains(`bookDetailBtn`)) {
         const bookID = $(e.target).data("bookid");
         $.ajax({
-            url: `book/modal/${bookID}`,
+            url: `/book/modal/${bookID}`,
             type: "POST",
             data: {
                 bookID: bookID,

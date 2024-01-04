@@ -2,12 +2,13 @@
 
 @section('title', 'Add a Content')
 
+
 @section('content')
     <section class="container my-5">
-        <form action="{{ route('book.content.store') }}" method="POST">
+        <form id="createBookContent" action="{{ route('book.content.store') }}" method="POST">
             @csrf
             <input type="hidden" value="{{ $id }}" name="book_id">
-            <div class="p-3 text-center" id="mytitle">
+            <div class="mytitle p-3 text-center" id="title">
                 <p>My Book Title</p>
             </div>
 
@@ -37,15 +38,27 @@
             outline: none;
         }
 
-        #mytitle:focus {
+        #title:focus {
             outline: none;
         }
 
-        #mytitle p {
+        #title p,
+        #title b,
+        #title i,
+        #title a,
+        #title u,
+        #title strong,
+        #title em {
             font-size: 2rem;
         }
 
-        #content p {
+        #content p,
+        #content b,
+        #content i,
+        #content u,
+        #content a,
+        #content strong,
+        #content em {
             font-size: 1.5rem;
             line-height: 1.2rem;
         }
@@ -53,14 +66,26 @@
 @endsection
 
 @section('script')
+    @if ($errors->any())
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            let errorMessages = @json($errors->all());
+            console.log(errorMessages);
+            Swal.fire({
+                icon: "error",
+                title: errorMessages[0],
+                text: errorMessages[1],
+                confirmButtonColor: "#000",
+            })
+        </script>
+    @endif
     <script>
         tinymce.init({
-            selector: '#mytitle',
+            selector: '#title',
             menubar: false,
             inline: true,
+            plugins: 'image quickbars table link',
             toolbar: false,
-            plugins: 'quickbars',
-            content_style: 'strong, em, u { font-size: 2rem; }',
         });
 
         tinymce.init({
@@ -69,7 +94,22 @@
             inline: true,
             plugins: 'image quickbars table link',
             toolbar: false,
-            content_style: 'strong, em, u { font-size: 1.5rem; }',
         });
+
+        const form = document.querySelector('#createBookContent')
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            Swal.fire({
+                icon: "success",
+                title: "Congrats!",
+                text: "Your have successfully create a new chapter!",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            }).catch((err) => {
+                console.log(err);
+            });
+        })
     </script>
 @endsection

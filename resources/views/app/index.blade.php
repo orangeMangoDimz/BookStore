@@ -12,8 +12,13 @@
             <h1>Explore the Creativity Without Limit</h1>
             <p class="fw-light">GeniusBook is the perfect place to <strong>explore, create, and publish</strong> your own
                 book without limit.</p>
-            <form id="search-box" class="shadow-sm bg-body-tertiary rounded w-50" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search for a book ..." aria-label="Search">
+            <form id="search-box"
+                class="shadow-sm bg-body-tertiary rounded w-50 d-flex justify-content-center align-items-center gap-3 flex-row"
+                role="search" action="{{ route('book.search') }}">
+                <input class="form-control me-2 border border-black" type="search" placeholder="Search for a book ..."
+                    aria-label="Search" name="keyword">
+                <button class="btn btn-outline-dark"><i class="bi bi-search"
+                        style="margin-right: 0 !important;"></i></button>
             </form>
         </div>
 

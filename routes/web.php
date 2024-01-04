@@ -31,12 +31,14 @@ Route::middleware('auth')->group(function () {
     Route::put('book/update/{id}', [BookController::class, 'update'])->name('book.update');
     Route::delete('book/delete/{id}', [BookController::class, 'destroy'])->name('book.destroy');
     Route::get('content/{id}', [BookController::class, 'content'])->name('book.content');
+    Route::get('book/search', [BookController::class, 'search'])->name('book.search');
 
     // * Book Content
     Route::get('book/detail/{id}', [BookContentController::class, 'index'])->name('book.content.detail');
     Route::get("book/create/content/{id}", [BookContentController::class, 'create'])->name("book.content.create");
     Route::post('book/detail/create/', [BookContentController::class, 'store'])->name('book.content.store');
 
+    Route::get('maintenance', [AppController::class, 'maintenance'])->name('maintenance');
 });
 
 // * Auth

@@ -29,7 +29,12 @@ class BookContentController extends Controller
             'title' => $request->input('title'),
             'content' => $request->input('content'),
         ];
-        $this->service->store($data);
-        return redirect()->route('home');
+        $success = $this->service->store($data);
+        return $success
+        ? redirect()->route('book.content.detail', $request->input('book_id'))
+        : redirect()->back()->withErrors([
+            'title' => "Woops, Internal Server Error!",
+            "message" => "Please try again later"
+        ]);
     }
 }

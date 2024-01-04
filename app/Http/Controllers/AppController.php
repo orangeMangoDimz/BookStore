@@ -21,4 +21,9 @@ class AppController extends Controller
         $currentDate = Carbon::now();
         return view('app.index', compact(['books', 'currentDate']));
     }
+
+    public function maintenance()
+    {
+        return view('partial.maintenance');
+    }
 }

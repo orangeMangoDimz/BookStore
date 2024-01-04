@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'Book Detail')
+@section('title', $book->title)
 
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
@@ -11,7 +11,7 @@
     <section class="container my-5">
         <div class="grid gap-5">
             <div class="row">
-                <div class="col-3">
+                <div class="col-lg-3 col-sm-12">
                     <figure class="d-block">
                         <img style="display: inline-block; height: 250px; object-fit: cover; object-position: center;"
                             src="{{ $book->image == '' ? 'holder.js/285x250?text=BookCover' : asset('images/bookCover/' . $book->image) }}"
@@ -38,31 +38,25 @@
                             </span>
                         </div>
                     </figcaption>
-                    <div class="my-3 d-flex justify-content-start flex-wrap flex-row align-items-center gap-3">
-                        <a href="{{ route('book.edit', $book->id) }}" class="btn btn-outline-dark"><i class="bi bi-pencil"
-                                style="margin-right: 0 !important;"></i></a>
-                        <form action="{{ route('book.destroy', $book->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-outline-danger" id="deleteBtn"><i class="bi bi-trash3"
-                                    style="margin-right: 0 !important;"></i></button>
-                        </form>
-                    </div>
+                    @if (Auth::user()->name == $book->user->name)
+                        <div class="my-3 d-flex justify-content-start flex-wrap flex-row align-items-center gap-3">
+                            <a href="{{ route('book.edit', $book->id) }}" class="btn btn-outline-dark"><i
+                                    class="bi bi-pencil" style="margin-right: 0 !important;"></i></a>
+                            <form id="deleteForm" action="{{ route('book.destroy', $book->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-outline-danger" id="deleteBtn"><i class="bi bi-trash3"
+                                        style="margin-right: 0 !important;"></i></button>
+                            </form>
+                        </div>
+                    @endif
                 </div>
-                <div class="col-9">
+                <div class="col-lg-9 col-sm-12">
                     <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                        <div class="container-fluid">
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-                                aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                                <div class="navbar-nav" id="book-navigation">
-                                    <a class="active nav-link fs-5" aria-current="page" href="#">Book Detail</a>
-                                    <a class="nav-link fs-5" href="#">Chapter List</a>
-                                </div>
-                            </div>
+                        <div class="navbar-nav d-flex flex-row justify-content-start align-items-start gap-3"
+                            id="book-navigation">
+                            <a class="active nav-link fs-5" aria-current="page" href="#">Book Detail</a>
+                            <a class="nav-link fs-5" href="#">Chapter List</a>
                         </div>
                     </nav>
                     <div id="cotnent" class="m-0 p-3 shadow-sm bg-body-white rounded">
@@ -112,7 +106,7 @@
                         @if (!empty($book->bookContent))
                             <ul>
                             @foreach ($book->bookContent as $content)
-                                    <li><a href="{{ route('book.read', $book->id) }}" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">{!! $content->title !!}</a></li>
+                                    <li><a href="{{ route('book.read', $content->id) }}" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">{!! $content->title !!}</a></li>
                                 @endforeach
                             </ul>
                         @else
@@ -179,7 +173,7 @@
                         icon: "success"
                     });
                     setTimeout(() => {
-                        e.target.parentElement.submit();
+                        document.querySelector('#deleteForm').submit();
                     }, 1500);
                 }
             });

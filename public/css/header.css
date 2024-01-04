@@ -8,7 +8,7 @@
     #offcanvas {
         display: block !important;
     }
-    #title {
+    #logo {
         display: none !important;
     }
     #wrapper {
@@ -26,7 +26,7 @@
     #offcanvas {
         display: none !important;
     }
-    #title {
+    #logo {
         display: inline !important;
     }
     #wrapper {

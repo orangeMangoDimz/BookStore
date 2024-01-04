@@ -40,4 +40,9 @@ class BookRepository
     {
         return Book::where('user_id', $userId)->get();
     }
+
+    public function searchBook($keyword)
+    {
+        return Book::where('title', 'LIKE', "%$keyword%")->orWhere('description', 'LIKE', "%$keyword%") ->paginate(5);
+    }
 }

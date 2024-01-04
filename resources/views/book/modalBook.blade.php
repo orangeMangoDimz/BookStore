@@ -3,7 +3,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-4" style="position: sticky; top: 0; height: 300px;">
+        <div id="info" class="col-lg-4 col-sm-12" style="position: sticky; top: 0; height: 300px;">
             <img style="display: inline-block; height:auto; width: 100%; height: 250px; object-fit: cover; object-position: center;"
                 src="{{ $book->image == '' ? 'holder.js/225x250?text=bookCover' : asset('images/bookCover/' . $book->image) }}"
                 alt="bookCover">
@@ -33,7 +33,7 @@
             </div>
         </div>
 
-        <div class="col-8">
+        <div class="col-lg-8 col-sm-12">
             <div class="accordion" id="synopsis">
                 <div class="accordion-item">
                     <h2 class="accordion-header">
@@ -65,8 +65,8 @@
                                 <ul>
                                     @foreach ($book->bookContent as $content)
                                         <li>
-                                            <a href="{{ route('book.read', $book->id) }}"
-                                                class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">{!! $content->title !!}</a>
+                                            <a href="{{ route('book.read', $content->id) }}"
+                                                class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover text-dark">{!! $content->title !!}</a>
                                         </li>
                                     @endforeach
                                 </ul>

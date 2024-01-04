@@ -3,3 +3,16 @@
 #detail-info p {
     font-size: 1rem !important;
 }
+
+@media only screen and (min-width: 1px) {
+    #info {
+        position: static !important;
+        height: auto !important;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    #info {
+        position: sticky !important;
+    }
+}

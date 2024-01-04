@@ -44,4 +44,9 @@ class BookService
     {
         return $this->repository->getBookByUserId($userId);
     }
+
+    public function searchBook($search)
+    {
+        return $this->repository->searchBook($search);
+    }
 }

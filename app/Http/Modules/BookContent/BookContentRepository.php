@@ -2,16 +2,24 @@
 namespace App\Http\Modules\BookContent;
 
 use App\Models\BookContent;
+use Exception;
 
 class BookContentRepository
 {
-    public function store(array $data)
+    public function store(array $data) : bool
     {
-        BookContent::create($data);
+        try{
+            BookContent::create($data);
+            return true;
+        }
+        catch (Exception $e)
+        {
+            return false;
+        }
     }
 
-    public function getBookContentById($book_id)
+    public function getBookContentById($id)
     {
-        return BookContent::where('book_id', $book_id)->first();
+        return BookContent::where('id', $id)->first();
     }
 }
